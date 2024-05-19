@@ -1,18 +1,18 @@
 <p>sign-up-page works!</p>
-<form>
+<form [formGroup]="form">
     <div>
-        <input type="text" placeholder="first name">
+        <input type="text" formControlName="firstName" placeholder="first name">
     </div>
     
     <div>
-        <input type="text" placeholder="last name">
+        <input type="text" formControlName="lastName" placeholder="last name">
     </div>
     
     <div>
-        <input type="type" placeholder="email">
+        <input type="type" formControlName="email" placeholder="email">
     </div>
     <div>
-        <input type="password" placeholder="password">
+        <input type="password" formControlName="password" placeholder="password">
     </div>
-    <button>sign up</button>
+    <button (click)="signUp()">sign up</button>
 </form>

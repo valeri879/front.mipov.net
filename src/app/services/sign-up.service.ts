@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SignUpService {
 
@@ -13,7 +12,7 @@ export class SignUpService {
   ) { }
   
   signUp(user: User) {
-    this._http.post('http://localhost:5002/sign-up', user);
+    return this._http.post('http://localhost:5002/sign-up', user);
   }
 
 }
