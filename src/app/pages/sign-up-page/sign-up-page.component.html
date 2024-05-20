@@ -1,18 +1,27 @@
-<p>sign-up-page works!</p>
-<form [formGroup]="form">
-    <div>
-        <input type="text" formControlName="firstName" placeholder="first name">
+<h1>Sign up</h1>
+<p>
+    Streamline your online presence with our app, where you can conveniently manage and share all your social media profiles from one centralized platform.
+</p>
+<form [formGroup]="form" class="px-3">
+    <div class="mb-3">
+        <label for="name">Name:</label>
+        <input class="form-control" id="name" type="text" formControlName="firstName" placeholder="first name">
     </div>
     
-    <div>
-        <input type="text" formControlName="lastName" placeholder="last name">
+    <div class="mb-3">
+        <label for="lastName">Last name:</label>
+        <input class="form-control" id="lastName" type="text" formControlName="lastName" placeholder="last name">
     </div>
     
-    <div>
-        <input type="type" formControlName="email" placeholder="email">
+    <div class="mb-3">
+        <label for="email">Email:</label>
+        <input class="form-control" id="email" type="type" formControlName="email" placeholder="personal email">
     </div>
-    <div>
-        <input type="password" formControlName="password" placeholder="password">
+    <div class="mb-3">
+        <label for="password">Password</label>
+        <input class="form-control" id="password" type="password" formControlName="password" placeholder="password">
     </div>
-    <button (click)="signUp()">sign up</button>
+    <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">sign up</button>
+    <div class="text-center">--OR--</div>
+    <a routerLink="/" class="btn btn-outline-primary w-100">sign in</a>
 </form>
