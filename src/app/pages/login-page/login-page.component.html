@@ -3,26 +3,26 @@
         <div class="col-md-4 p-3">
             <h1>Login</h1>
             <p>for authorization please enter your email and password</p>
-            <form>
+            <form [formGroup]="form">
                 <div class="mb-3">
                     <label for="email">Email:</label>
                     <div class="input-group">
                         <span class="input-group-text">✉️</span>
-                        <input class="form-control" type="email" id="email">
+                        <input formControlName="email" class="form-control" type="email" id="email">
                     </div>
                 </div>
                 <div class="mb-2">
                     <label for="password">Password:</label>
                     <div class="input-group">
                         <span class="input-group-text">🔒</span>
-                        <input class="form-control" type="{{ !show ? 'password' : 'text' }}" id="password">
+                        <input formControlName="password" class="form-control" type="{{ !show ? 'password' : 'text' }}" id="password">
                     </div>
                 </div>
                 <div class="form-check mb-3">
                     <input (change)="show = !show" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                     <label class="form-check-label text-primary user-select-none" for="flexCheckDefault"><u>{{ !show ? 'Show' : 'Hide'}} password</u></label>
                   </div>
-                <button class="btn btn-primary w-100">log in</button>
+                <button [disabled]="form.invalid" (click)="login()" class="btn btn-primary w-100">log in</button>
                 <div class="text-center">OR</div>
                 <a routerLink="/sign-up" class="btn btn-outline-primary w-100">sign up</a>
             </form>

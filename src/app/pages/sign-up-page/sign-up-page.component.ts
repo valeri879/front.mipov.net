@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SignUpService } from '../../services/sign-up.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -27,11 +27,11 @@ export class SignUpPageComponent {
   });
 
   constructor(
-    private _signUpService: SignUpService
+    private _authenticationService: AuthenticationService
   ) {}
 
   signUp() {
-    this._signUpService.signUp(this.form.value).subscribe(
+    this._authenticationService.signUp(this.form.value).subscribe(
       res => {
         console.log(res)
       },
