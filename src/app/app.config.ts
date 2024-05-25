@@ -6,12 +6,14 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { withCredentialInterceptor } from './interceptors/with-credential.interceptor';
+import { accessTokenInterceptor } from './interceptors/access-token.interceptor';
+import { refreshTokenInterceptor } from './interceptors/refresh-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
       withFetch(),
-      withInterceptors([withCredentialInterceptor])
+      withInterceptors([withCredentialInterceptor, accessTokenInterceptor, refreshTokenInterceptor])
     ),
     provideRouter(routes),
     provideClientHydration(),

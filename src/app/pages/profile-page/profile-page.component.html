@@ -1,1 +1,4 @@
+<ng-container *ngIf="user$ | async as user">
+    <code>{{ user | json }}</code>
+</ng-container>
 <p>profile-page works!</p>

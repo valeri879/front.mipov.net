@@ -20,10 +20,8 @@ export class AuthenticationService {
     return this._http.post<{ accessToken: string; refreshToken: string }>('http://localhost:5002/login', user)
   }
 
-  isLoggedIn() {
-
+  refreshToken(): Observable<{ accessToken: string; refreshToken: string }> {
+    return this._http.get<{ accessToken: string; refreshToken: string }>('http://localhost:5002/token');
   }
-
-  cookieParser() {}
 
 }
