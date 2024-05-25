@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-@Component({
-  selector: 'app-sign-up-page',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule
-  ],
-  providers: [
-    // HttpClient
-  ],
-  templateUrl: './sign-up-page.component.html',
-  styleUrl: './sign-up-page.component.scss'
-})
+@Component({ selector: 'app-sign-up-page',
+    standalone: true,
+    templateUrl: './sign-up-page.component.html',
+    styleUrl: './sign-up-page.component.scss', imports: [ReactiveFormsModule,
+        RouterModule], providers: [
+          
+    ] })
 export class SignUpPageComponent {
   public form: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),

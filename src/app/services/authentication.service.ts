@@ -20,4 +20,10 @@ export class AuthenticationService {
     return this._http.post<{ accessToken: string; refreshToken: string }>('http://localhost:5002/login', user)
   }
 
+  isLoggedIn() {
+
+  }
+
+  cookieParser() {}
+
 }

@@ -8,21 +8,24 @@
                     <label for="email">Email:</label>
                     <div class="input-group">
                         <span class="input-group-text">✉️</span>
-                        <input formControlName="email" class="form-control" type="email" id="email">
+                        <input [class.is-invalid]="error" [class.is-valid]="success" formControlName="email" class="form-control" type="email" id="email">
                     </div>
                 </div>
                 <div class="mb-2">
                     <label for="password">Password:</label>
                     <div class="input-group">
                         <span class="input-group-text">🔒</span>
-                        <input formControlName="password" class="form-control" type="{{ !show ? 'password' : 'text' }}" id="password">
+                        <input [class.is-invalid]="error" [class.is-valid]="success" formControlName="password" class="form-control" type="{{ !show ? 'password' : 'text' }}" id="password">
                     </div>
                 </div>
                 <div class="form-check mb-3">
                     <input (change)="show = !show" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                     <label class="form-check-label text-primary user-select-none" for="flexCheckDefault"><u>{{ !show ? 'Show' : 'Hide'}} password</u></label>
-                  </div>
-                <button [disabled]="form.invalid" (click)="login()" class="btn btn-primary w-100">log in</button>
+                </div>
+                <!-- error -->
+                <div *ngIf="error" class="alert alert-danger" role="alert">{{ error.message }}</div>
+
+                <button [disabled]="form.invalid || success" (click)="login()" class="btn btn-primary w-100">log in</button>
                 <div class="text-center">OR</div>
                 <a routerLink="/sign-up" class="btn btn-outline-primary w-100">sign up</a>
             </form>
