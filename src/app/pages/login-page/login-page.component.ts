@@ -26,7 +26,7 @@ export class LoginPageComponent {
   public success: boolean = false;
 
   public form: FormGroup = new FormGroup({
-    email: new FormControl('1.1maar2quez@gmail.com', [Validators.required, Validators.email]),
+    email: new FormControl('valeri.kharitonashvili1@gmail.com', [Validators.required, Validators.email]),
     password: new FormControl('123123', [Validators.required, Validators.minLength(6)])
   });
 
