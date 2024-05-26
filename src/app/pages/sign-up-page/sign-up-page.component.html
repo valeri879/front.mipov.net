@@ -1,27 +1,38 @@
-<h1>Sign up</h1>
-<p>
-    Streamline your online presence with our app, where you can conveniently manage and share all your social media profiles from one centralized platform.
-</p>
-<form [formGroup]="form" class="px-3">
-    <div class="mb-3">
-        <label for="name">Name:</label>
-        <input class="form-control" id="name" type="text" formControlName="firstName" placeholder="first name">
-    </div>
-    
-    <div class="mb-3">
+<div class="container py-3">
+    <h1>🚀 Sign up</h1>
+    <p>
+        Streamline your online presence with our app, where you can conveniently manage and share all your social media
+        profiles from one centralized platform.
+    </p>
+    <form [formGroup]="form">
+        <label for="userName">User name:</label>
+        <div class="input-group mb-3">
+            <span [class.has-validation]="userName.errors!['pattern']" class="input-group-text">🔗</span>
+            <input [class.is-invalid]="userName.invalid && userName.dirty" class="form-control" id="userName" type="text" formControlName="userName" placeholder="unique user name">
+            <div *ngIf="userName.errors!['pattern']" class="invalid-feedback">Username can only contain letters and numbers, no spaces or special characters.</div>
+        </div>
+        <label for="name">First name:</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">👤</span>
+            <input class="form-control" id="name" type="text" formControlName="firstName">
+        </div>
         <label for="lastName">Last name:</label>
-        <input class="form-control" id="lastName" type="text" formControlName="lastName" placeholder="last name">
-    </div>
-    
-    <div class="mb-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text">🎩</span>
+            <input class="form-control" id="lastName" type="text" formControlName="lastName">
+        </div>
         <label for="email">Email:</label>
-        <input class="form-control" id="email" type="type" formControlName="email" placeholder="personal email">
-    </div>
-    <div class="mb-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text">✉️</span>
+            <input class="form-control" id="email" type="type" formControlName="email">
+        </div>
         <label for="password">Password</label>
-        <input class="form-control" id="password" type="password" formControlName="password" placeholder="password">
-    </div>
-    <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">sign up</button>
-    <div class="text-center">--OR--</div>
-    <a routerLink="/" class="btn btn-outline-primary w-100">sign in</a>
-</form>
+        <div class="input-group mb-3">
+            <span class="input-group-text">🔒</span>
+            <input class="form-control" id="password" type="password" formControlName="password">
+        </div>
+        <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">sign up</button>
+        <div class="text-center">--OR--</div>
+        <a routerLink="/" class="btn btn-outline-primary w-100">sign in</a>
+    </form>
+</div>

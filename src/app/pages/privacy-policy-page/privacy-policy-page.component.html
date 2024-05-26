@@ -1,0 +1,6 @@
+<ng-container *ngIf="data$ | async as data">
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <article [innerHTML]="data.data"></article>
+    </div>
+</ng-container>

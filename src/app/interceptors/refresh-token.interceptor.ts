@@ -15,6 +15,10 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
               headers: req.headers.set('authorization', accessToken)
             })
             return next(retryRequest);
+          }),
+          catchError(refreshTokenError => {
+            // If the token refresh also fails, propagate the original error
+            throw refreshTokenError;
           })
         )
       }

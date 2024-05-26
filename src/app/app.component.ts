@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 
 @Component({
@@ -7,7 +7,8 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
   standalone: true,
   imports: [
     RouterOutlet,
-    MainPageComponent
+    MainPageComponent,
+    RouterModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

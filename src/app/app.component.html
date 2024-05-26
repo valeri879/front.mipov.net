@@ -1,1 +1,23 @@
+<header>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container">
+            <div>
+                <a routerLink="/" class="navbar-brand mb-0 h1"><b>mipov.net</b></a>
+                <a routerLink="/about" class="px-2">About</a>
+                <a routerLink="/help" class="px-2">Help</a>
+                <a routerLink="/privacy-policy" class="px-2">Privacy policy</a>
+            </div>
+            <a routerLink="/sign-up" class="btn btn-primary">Sign up</a>
+        </div>
+    </nav>
+</header>
+
 <router-outlet></router-outlet>
+
+<footer class="bg-dark text-white py-3">
+    <div class="container text-center d-flex justify-content-center">
+        <a class="px-3" routerLink="/">Main</a>
+        <a class="px-3" routerLink="/sign-up">Sign up</a>
+        <a class="px-3" routerLink="/privacy-policy">Privacy policy</a>
+    </div>
+</footer>

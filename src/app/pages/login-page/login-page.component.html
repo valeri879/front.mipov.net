@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 p-3">
-            <h1>Login</h1>
+            <h1>🗝️ Login</h1>
             <p>for authorization please enter your email and password</p>
             <form [formGroup]="form">
                 <div class="mb-3">
@@ -25,9 +25,9 @@
                 <!-- error -->
                 <div *ngIf="error" class="alert alert-danger" role="alert">{{ error.message }}</div>
 
-                <button [disabled]="form.invalid || success" (click)="login()" class="btn btn-primary w-100">log in</button>
+                <button [disabled]="form.invalid || success" (click)="login()" class="btn btn-primary w-100">Log in</button>
                 <div class="text-center">OR</div>
-                <a routerLink="/sign-up" class="btn btn-outline-primary w-100">sign up</a>
+                <a routerLink="/sign-up" class="btn btn-outline-primary w-100">Sign up</a>
             </form>
         </div>
         <div class="col-md-8">

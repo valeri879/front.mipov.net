@@ -10,7 +10,7 @@ export class ProfileService {
   
   private _http = inject(HttpClient);
 
-  profile(): Observable<User> {
-    return this._http.get<User>('http://localhost:5002/profile');
+  profile(userName: string = ''): Observable<User> {
+    return this._http.get<User>(`http://localhost:5002/profile/${userName}`);
   }
 }

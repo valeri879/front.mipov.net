@@ -1,4 +1,13 @@
 <ng-container *ngIf="user$ | async as user">
-    <code>{{ user | json }}</code>
+    <div class="container py-3">
+      <div class="card">
+        <div class="card-header"><b>Profile</b></div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">User Name: {{ user.userName }}</li>
+          <li class="list-group-item">First Name: {{ user.firstName }}</li>
+          <li class="list-group-item">Last Name: {{ user.lastName }}</li>
+          <li class="list-group-item">Email: {{ user.email }}</li>
+        </ul>
+      </div>
+    </div>
 </ng-container>
-<p>profile-page works!</p>
