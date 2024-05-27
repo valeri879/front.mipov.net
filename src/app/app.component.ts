@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import { AuthenticationService } from './services/authentication.service';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,13 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
   imports: [
     RouterOutlet,
     MainPageComponent,
-    RouterModule
+    RouterModule,
+    NgIf,
+    AsyncPipe
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'front.mipov.net';
+  public authenticationService = inject(AuthenticationService);
 }

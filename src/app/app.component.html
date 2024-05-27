@@ -7,7 +7,12 @@
                 <a routerLink="/help" class="px-2">Help</a>
                 <a routerLink="/privacy-policy" class="px-2">Privacy policy</a>
             </div>
-            <a routerLink="/sign-up" class="btn btn-primary">Sign up</a>
+            <ng-container *ngIf="authenticationService.isLoggedIn$ | async; else signUpButton">
+                <a routerLink="/profile" class="btn btn-outline-primary px-2">Sign out 🚪</a>
+            </ng-container>
+            <ng-template #signUpButton>
+                <a routerLink="/sign-up" class="btn btn-primary">Sign up</a>
+            </ng-template>
         </div>
     </nav>
 </header>

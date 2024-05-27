@@ -13,7 +13,11 @@ export class AuthenticationService {
   private _cookieService = inject(CookieService);
   private _router = inject(Router);
   
-  private _isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  
+  constructor() {
+    this._isLoggedIn();
+  }
 
   signUp(user: User) {
     return this._http.post('http://localhost:5002/sign-up', user);
@@ -32,8 +36,8 @@ export class AuthenticationService {
     this._router.navigateByUrl('/');
   }
 
-/*   isLoggedIn(): boolean {
-    const token = this._cookieService.get('accessToken');
-  } */
+  private _isLoggedIn()  {
+    this._cookieService.get('accessToken') ? this.isLoggedIn$.next(true) : this.isLoggedIn$.next(false);
+  }
 
 }
