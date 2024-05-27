@@ -7,8 +7,10 @@ export const loginGuard: CanActivateFn = (route, state) => {
   const cookieService = inject(CookieService);
   
   const accessToken = cookieService.get('accessToken');
-  if (accessToken) return false;
+  if (accessToken) {
+    router.navigateByUrl('/profile');
+    return false;
+  };
 
-  router.navigateByUrl('/privacy-policy');
   return true;
 };

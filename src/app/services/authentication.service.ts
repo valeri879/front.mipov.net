@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
@@ -20,11 +20,15 @@ export class AuthenticationService {
   }
 
   signUp(user: User) {
-    return this._http.post('http://localhost:5002/sign-up', user);
+    return this._http.post('http://localhost:5002/sign-up', user).pipe(
+      tap(() => this.isLoggedIn$.next(true))
+    );
   }
 
   logIn(user: { email: string; password: string }): Observable<{ accessToken: string; refreshToken: string }> {
-    return this._http.post<{ accessToken: string; refreshToken: string }>('http://localhost:5002/login', user);
+    return this._http.post<{ accessToken: string; refreshToken: string }>('http://localhost:5002/login', user).pipe(
+      tap(() => this.isLoggedIn$.next(true))
+    );
   }
 
   refreshToken(): Observable<{ accessToken: string; refreshToken: string }> {
@@ -33,6 +37,7 @@ export class AuthenticationService {
 
   logOut() {
     this._cookieService.deleteAll();
+    this.isLoggedIn$.next(false);
     this._router.navigateByUrl('/');
   }
 

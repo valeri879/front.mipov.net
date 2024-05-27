@@ -8,21 +8,24 @@
                 <a routerLink="/privacy-policy" class="px-2">Privacy policy</a>
             </div>
             <ng-container *ngIf="authenticationService.isLoggedIn$ | async; else signUpButton">
-                <a routerLink="/profile" class="btn btn-outline-primary px-2">Sign out 🚪</a>
+                <div (click)="authenticationService.logOut()" class="btn btn-outline-primary px-2">Sign out</div>
             </ng-container>
             <ng-template #signUpButton>
-                <a routerLink="/sign-up" class="btn btn-primary">Sign up</a>
+                <a routerLink="/login" class="btn btn-primary">Log in</a>
             </ng-template>
         </div>
     </nav>
 </header>
 
-<router-outlet></router-outlet>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
 
-<footer class="bg-dark text-white py-3">
+<footer class="bg-body-tertiary py-3">
     <div class="container text-center d-flex justify-content-center">
         <a class="px-3" routerLink="/">Main</a>
         <a class="px-3" routerLink="/sign-up">Sign up</a>
         <a class="px-3" routerLink="/privacy-policy">Privacy policy</a>
     </div>
+    <div class="text-center mt-3">Created by <a target="_blank" href="https://github.com/valeri879">Val Do</a> with ❤️</div>
 </footer>

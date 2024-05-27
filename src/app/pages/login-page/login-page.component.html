@@ -1,8 +1,8 @@
 <div class="container my-3">
     <div class="row">
-        <div class="col-md-4 p-3">
+        <div class="col-md-4">
             <h1>🗝️ Login</h1>
-            <p>for authorization please enter your email and password</p>
+            <p>For authorization please enter your email and password.</p>
             <form [formGroup]="form">
                 <div class="mb-3">
                     <label for="email">Email:</label>
@@ -23,18 +23,18 @@
                     <label class="form-check-label text-primary user-select-none" for="flexCheckDefault"><u>{{ !show ? 'Show' : 'Hide'}} password</u></label>
                 </div>
                 <!-- error -->
-                <div *ngIf="error" class="alert alert-danger" role="alert">{{ error.message }}</div>
+                <ng-container *ngIf="error">
+                    <div class="alert alert-danger mb-0" role="alert">{{ error.message }}</div>
+                    <button class="btn btn-link w-100">Reset your password</button>
+                </ng-container>
 
                 <button [disabled]="form.invalid || success" (click)="login()" class="btn btn-primary w-100">Log in</button>
-                <div class="text-center">OR</div>
-                <a routerLink="/sign-up" class="btn btn-outline-primary w-100">Sign up</a>
             </form>
         </div>
         <div class="col-md-8">
-            <h1>Welcome to Mipov.net</h1>
-            <h2>Connect All Your Social Media in One Place</h2>
+            <h2 class="mt-3 mt-md-0">Connect All Your Social Media in One Place</h2>
             <p>
-                Mipov.net is the ultimate platform for effortlessly sharing your social media profiles. Whether you want to showcase your latest YouTube videos, viral TikTok moments, Facebook updates, Twitter thoughts, or Instagram photos, LinkShare makes it simple.
+                Mipov.net is the ultimate platform for effortlessly sharing your social media profiles. Whether you want to showcase your latest YouTube videos, viral TikTok moments, Facebook updates, Twitter thoughts, or Instagram photos, mipov.net makes it simple.
             </p>
             <h3>Why Use Mipov.net?</h3>
             <ul>
@@ -49,7 +49,7 @@
                 <li>Share: Share your Mipov.net URL and let everyone discover your diverse online presence.</li>
             </ol>
             <h4>Get Started Now</h4>
-            <p>Join LinkShare today and make sharing your social media profiles easier than ever!</p>
+            <p>Join mipov.net today and make sharing your social media profiles easier than ever!</p>
             <hr>
             <p>Feel free to customize this text to better fit the tone and style of your web application.</p>
         </div>

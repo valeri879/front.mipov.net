@@ -1,38 +1,70 @@
 <div class="container py-3">
-    <h1>🚀 Sign up</h1>
-    <p>
-        Streamline your online presence with our app, where you can conveniently manage and share all your social media
-        profiles from one centralized platform.
-    </p>
-    <form [formGroup]="form">
-        <label for="userName">User name:</label>
-        <div class="input-group mb-3">
-            <span [class.has-validation]="userName.errors!['pattern']" class="input-group-text">🔗</span>
-            <input [class.is-invalid]="userName.invalid && userName.dirty" class="form-control" id="userName" type="text" formControlName="userName" placeholder="unique user name">
-            <div *ngIf="userName.errors!['pattern']" class="invalid-feedback">Username can only contain letters and numbers, no spaces or special characters.</div>
+    <div class="row">
+        <div class="col-md-4">
+            <h1>🚀 Sign up</h1>
+            <p>
+                Streamline your online presence with our app, where you can conveniently manage and share all your social
+                media
+                profiles from one centralized platform.
+            </p>
+            <form [formGroup]="form">
+                <label for="userName">User name:</label>
+                <div class="input-group mb-3">
+                    <span [class.has-validation]="userName.errors!['pattern']" class="input-group-text">🔗</span>
+                    <input [class.is-invalid]="userName.invalid && userName.dirty" class="form-control" id="userName"
+                        type="text" formControlName="userName" placeholder="unique user name">
+                    <div *ngIf="userName.errors!['pattern']" class="invalid-feedback">Username can only contain letters and
+                        numbers, no spaces or special characters.</div>
+                </div>
+                <label for="name">First name:</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">👤</span>
+                    <input class="form-control" id="name" type="text" formControlName="firstName">
+                </div>
+                <label for="lastName">Last name:</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">🎩</span>
+                    <input class="form-control" id="lastName" type="text" formControlName="lastName">
+                </div>
+                <label for="email">Email:</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">✉️</span>
+                    <input class="form-control" id="email" type="type" formControlName="email">
+                </div>
+                <label for="password">Password</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">🔒</span>
+                    <input class="form-control" id="password" type="password" formControlName="password">
+                </div>
+                <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">sign up</button>
+                <div class="text-center">--OR--</div>
+                <a routerLink="/" class="btn btn-outline-primary w-100">sign in</a>
+            </form>
         </div>
-        <label for="name">First name:</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">👤</span>
-            <input class="form-control" id="name" type="text" formControlName="firstName">
+        <div class="col-md-8">
+            <h2>Connect and Share Your Social Media Profiles with Ease</h2>
+            <p>
+                At Mipov.net, we make it simple for you to share all your social media profiles in one convenient place. Whether you're a content creator, influencer, or just someone who loves to connect with friends and followers, our platform is designed to help you manage and share your social media presence effortlessly.
+            </p>
+            <h2>Sign Up to Get Started</h2>
+            <p>Create your free account today and start sharing your social media profiles in minutes. Simply fill in the form below:</p>
+            <h3>Required Fields:</h3>
+            <ul>
+                <li>Username: Create a unique username that will be part of your public profile URL. (Must be unique)</li>
+                <li>First Name: Enter your first name.</li>
+                <li>Last Name: Enter your last name.</li>
+                <li>Email: Enter a valid email address. This will be used for account verification and communication. (Must be unique)</li>
+                <li>Password: Choose a strong password to keep your account secure.</li>
+            </ul>
+            <h2>Why Join mipov.net?</h2>
+            <ul>
+                <li>All-In-One Platform: Share your YouTube, TikTok, Facebook, Twitter, Instagram, and more from a single profile.</li>
+                <li>Easy to Use: Our user-friendly interface makes adding and managing your links quick and simple.</li>
+                <li>Customizable: Personalize your profile to reflect your brand or personality.</li>
+                <li>Connect with Everyone: Make it easier for people to find and follow you on all your social media accounts.</li>
+            </ul>
+            <h2>Get Started Now!</h2>
+            <p>Fill out the form to create your account and start sharing your social media links today. Join the growing community of users who trust mipov.net to manage their social media links.</p>
         </div>
-        <label for="lastName">Last name:</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">🎩</span>
-            <input class="form-control" id="lastName" type="text" formControlName="lastName">
-        </div>
-        <label for="email">Email:</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">✉️</span>
-            <input class="form-control" id="email" type="type" formControlName="email">
-        </div>
-        <label for="password">Password</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">🔒</span>
-            <input class="form-control" id="password" type="password" formControlName="password">
-        </div>
-        <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">sign up</button>
-        <div class="text-center">--OR--</div>
-        <a routerLink="/" class="btn btn-outline-primary w-100">sign in</a>
-    </form>
+    </div>
 </div>
