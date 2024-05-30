@@ -8,10 +8,13 @@
                 <a routerLink="/privacy-policy" class="px-2">Privacy policy</a>
             </div>
             <ng-container *ngIf="authenticationService.isLoggedIn$ | async; else signUpButton">
-                <div (click)="authenticationService.logOut()" class="btn btn-outline-primary px-2">Sign out</div>
+                <div (click)="authenticationService.logOut()" class="btn btn-sm btn-outline-danger px-2">Sign out</div>
             </ng-container>
             <ng-template #signUpButton>
-                <a routerLink="/login" class="btn btn-primary">Log in</a>
+                <div class="d-flex">
+                    <a routerLink="/login" class="btn btn-sm btn-primary">Log in</a>
+                    <a routerLink="/" class="btn btn-sm btn-outline-success ms-1">Sign up</a>
+                </div>
             </ng-template>
         </div>
     </nav>

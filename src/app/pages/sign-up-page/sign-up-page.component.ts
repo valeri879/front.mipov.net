@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { RouterModule } from '@angular/router';
@@ -18,8 +18,15 @@ import { JsonPipe, NgIf } from '@angular/common';
 
   ]
 })
-export class SignUpPageComponent {
-  public form: FormGroup = new FormGroup({
+export class SignUpPageComponent implements OnInit{
+  public form!: FormGroup;
+
+  constructor(
+    private _authenticationService: AuthenticationService
+  ) {}
+
+  ngOnInit(): void {
+    this.form = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -27,9 +34,7 @@ export class SignUpPageComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(55)]),
   });
 
-  constructor(
-    private _authenticationService: AuthenticationService
-  ) {}
+  }
 
   signUp() {
     this._authenticationService.signUp(this.form.value).subscribe(

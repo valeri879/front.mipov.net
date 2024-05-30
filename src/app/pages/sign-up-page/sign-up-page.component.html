@@ -10,11 +10,12 @@
             <form [formGroup]="form">
                 <label for="userName">User name:</label>
                 <div class="input-group mb-3">
-                    <span [class.has-validation]="userName.errors!['pattern']" class="input-group-text">🔗</span>
+                    <span class="input-group-text">🔗</span>
                     <input [class.is-invalid]="userName.invalid && userName.dirty" class="form-control" id="userName"
                         type="text" formControlName="userName" placeholder="unique user name">
-                    <div *ngIf="userName.errors!['pattern']" class="invalid-feedback">Username can only contain letters and
-                        numbers, no spaces or special characters.</div>
+                    <ng-container *ngIf="userName.errors">
+                        <div *ngIf="userName.errors['pattern']" class="invalid-feedback">Username can only contain letters and numbers, no spaces or special characters.</div>
+                    </ng-container>
                 </div>
                 <label for="name">First name:</label>
                 <div class="input-group mb-3">
@@ -36,9 +37,7 @@
                     <span class="input-group-text">🔒</span>
                     <input class="form-control" id="password" type="password" formControlName="password">
                 </div>
-                <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">sign up</button>
-                <div class="text-center">--OR--</div>
-                <a routerLink="/" class="btn btn-outline-primary w-100">sign in</a>
+                <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">Sign up</button>
             </form>
         </div>
         <div class="col-md-8">
