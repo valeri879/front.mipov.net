@@ -6,6 +6,7 @@ import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -23,6 +24,8 @@ export class ProfilePageComponent implements OnInit {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _title = inject(Title);
+
+  public authenticationService = inject(AuthenticationService);
   
 
   user$!: Observable<User>;

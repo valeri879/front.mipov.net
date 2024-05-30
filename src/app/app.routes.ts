@@ -13,5 +13,5 @@ export const routes: Routes = [
  { path: 'error', component: ErrorPageComponent, title: 'Error' },
  { path: 'privacy-policy', component: PrivacyPolicyPageComponent, title: 'Privacy policy' },
  { path: 'profile', component: ProfilePageComponent, title: 'Privacy policy' },
- { path: ':userName', component: ProfilePageComponent, title: 'profile', canActivate: [ authGuard ] }
+ { path: ':userName', component: ProfilePageComponent, title: 'profile'}
 ];
