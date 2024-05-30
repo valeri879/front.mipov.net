@@ -18,8 +18,9 @@ import { ProfileService } from '../../services/profile.service';
   ],
 })
 export class SignUpPageComponent implements OnInit{
+
   public form!: FormGroup;
-  public error!: { message: string };
+  public error!: { message: string, errorType: string };
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -29,7 +30,7 @@ export class SignUpPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = new FormGroup({
-    userName: new FormControl('valeri879', [Validators.required, Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
+    userName: new FormControl('valeri879', [Validators.required, Validators.minLength(2), Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
     firstName: new FormControl('Valerian', [Validators.required]),
     lastName: new FormControl('Kharitonashvili', [Validators.required]),
     email: new FormControl('val@do.com', [Validators.required, Validators.email]),
@@ -52,9 +53,7 @@ export class SignUpPageComponent implements OnInit{
             this._router.navigateByUrl(userName);
         };
       },
-      error: ({ error }) => {
-        console.log(error)
-      }
+      error: ({ error }) => this.error = error
     });
   }
 
