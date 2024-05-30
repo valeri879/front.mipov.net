@@ -33,7 +33,6 @@ export class LoginPageComponent {
   public error!: { message: string };
 
   login() {
-    this._profileService
     this._authenticationService.logIn(this.form.value).pipe(
       switchMap(data => this._profileService.profile().pipe(map(( { userName } ) => {
         return {

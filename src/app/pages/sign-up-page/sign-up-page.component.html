@@ -37,6 +37,8 @@
                     <span class="input-group-text">🔒</span>
                     <input class="form-control" id="password" type="password" formControlName="password">
                 </div>
+                <!-- error message -->
+                <div *ngIf="error">{{ error.message }}</div>
                 <button class="btn btn-primary w-100" [disabled]="form.invalid" (click)="signUp()">Sign up</button>
             </form>
         </div>

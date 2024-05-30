@@ -19,8 +19,8 @@ export class AuthenticationService {
     this._isLoggedIn();
   }
 
-  signUp(user: User) {
-    return this._http.post('http://localhost:5002/sign-up', user).pipe(
+  signUp(user: User): Observable<{ accessToken: string; refreshToken: string }>  {
+    return this._http.post<{ accessToken: string; refreshToken: string }>('http://localhost:5002/sign-up', user).pipe(
       tap(() => this.isLoggedIn$.next(true))
     );
   }
