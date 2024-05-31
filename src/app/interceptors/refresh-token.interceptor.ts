@@ -2,8 +2,10 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
+  const route = inject(ActivatedRoute);
   const authenticationService = inject(AuthenticationService);
 
   return next(req).pipe(

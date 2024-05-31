@@ -8,7 +8,7 @@
                 <a routerLink="/privacy-policy" class="px-2">Privacy policy</a>
             </div>
             <ng-container *ngIf="authenticationService.isLoggedIn$ | async; else signUpButton">
-                <div (click)="authenticationService.logOut()" class="btn btn-sm btn-outline-danger px-2">Sign out</div>
+                <app-user-menu-dropdown></app-user-menu-dropdown>
             </ng-container>
             <ng-template #signUpButton>
                 <div class="d-flex">

@@ -3,6 +3,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { UserMenuDropdownComponent } from './components/user-menu-dropdown/user-menu-dropdown.component';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
   imports: [
     RouterOutlet,
     MainPageComponent,
+    UserMenuDropdownComponent,
     RouterModule,
     NgIf,
     AsyncPipe
