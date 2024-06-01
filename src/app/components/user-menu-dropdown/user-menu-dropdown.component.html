@@ -1,6 +1,5 @@
 <div class="dropdown">
-    <button (click)="toggle = !toggle" class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
+    <button (click)="toggle = !toggle" class="btn btn-sm btn-primary dropdown-toggle" type="button">
         ⚙️ settings
     </button>
     <ul style="right: 0;" [class.show]="toggle" class="dropdown-menu dropdown-menu-end">
@@ -11,3 +10,6 @@
         <li><div (click)="authenticationService.logOut()" style="cursor: pointer;" class="dropdown-item">🚪 Sign out</div></li>
     </ul>
 </div>
+
+<!-- backdrop -->
+<div (click)="toggle = !toggle" [class.d-none]="!toggle" style="z-index: 1; left: 0; top: 0;" class="position-fixed bg-red w-100 h-100"></div>
