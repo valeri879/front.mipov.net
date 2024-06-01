@@ -1,16 +1,69 @@
 <ng-container *ngIf="user$ | async as user">
-    <div class="container py-3">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between">
-          <b>Profile</b>
-          <button *ngIf="authenticationService.isLoggedIn$ | async" class="btn btn-sm btn-outline-primary">edit info</button>
+  <div class="container py-3">
+    <h2>Personal info</h2>
+    <div class="card mb-3">
+      <div class="card-body">
+          <form [formGroup]="personalInfoFormGroup">
+          <label for="userName">User name:</label>
+          <div [class.has-validation]="(userName.invalid && userName.dirty)"
+            [class.has-validation]="error ? error.errorType == 'userName' ? true: false : false"
+            class="input-group mb-3">
+            <span class="input-group-text">https://mipov.net/</span>
+            <input [class.is-invalid]="(userName.invalid && userName.dirty)"
+              [class.is-invalid]="error ? error.errorType == 'userName' ? true: false : false" class="form-control"
+              id="userName" type="text" formControlName="userName" placeholder="Unique user name">
+            <!-- frontend validation -->
+            <ng-container *ngIf="userName.errors">
+              <div *ngIf="userName.errors['pattern']" class="invalid-feedback">Username can only contain letters and
+                numbers, no
+                spaces or special characters.</div>
+            </ng-container>
+            <!-- backend validation -->
+            <div class="invalid-feedback" *ngIf="error?.errorType == 'userName'">{{ error.message }}</div>
+          </div>
+          <label for="name">First name:</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">👤</span>
+            <input class="form-control" id="name" type="text" formControlName="firstName">
+          </div>
+          <label for="lastName">Last name:</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">🎩</span>
+            <input class="form-control" id="lastName" type="text" formControlName="lastName">
+          </div>
+          <label for="about">About:</label>
+          <div class="input-group mb-3">
+            <textarea formControlName="about" id="about" class="form-control"></textarea>
+          </div>
+          <button class="btn btn-success w-100" [disabled]="personalInfoFormGroup.invalid">Save</button>
+          </form>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">User Name: {{ user.userName }}</li>
-          <li class="list-group-item">First Name: {{ user.firstName }}</li>
-          <li class="list-group-item">Last Name: {{ user.lastName }}</li>
-          <li class="list-group-item">Email: {{ user.email }}</li>
-        </ul>
       </div>
-    </div>
+      <h2>Email and password</h2>
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="emailAndPasswordFormGroup">
+            <label for="email">Email:</label>
+            <div [class.has-validation]="error ? error.errorType == 'email' ? true: false : false" class="input-group mb-3">
+              <span class="input-group-text">✉️</span>
+              <input [class.is-invalid]="error ? error.errorType == 'email' ? true: false : false" class="form-control"
+                id="email" type="type" formControlName="email">
+              <!-- backend validation -->
+              <div class="invalid-feedback" *ngIf="error?.errorType == 'email'">{{ error.message }}</div>
+            </div>
+            <label for="password">Password:</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">🔒</span>
+              <input class="form-control" id="password" type="pasword" formControlName="oldPassword">
+            </div>
+            <label for="newPassword">New password:</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">🔒</span>
+              <input class="form-control" id="newPassword" type="pasword" formControlName="newPassword">
+            </div>
+            <button class="btn btn-success w-100" [disabled]="emailAndPasswordFormGroup.invalid">Save</button>
+          </form>
+        </div>
+      </div>
+  </div>
 </ng-container>
