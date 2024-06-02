@@ -13,4 +13,8 @@ export class ProfileService {
   profile(userName: string = ''): Observable<User> {
     return this._http.get<User>(`http://localhost:5002/profile/${userName}`);
   }
+
+  updateUserNameFirstNameLastNameAbout(user: { userName: string; firstName: string; lastName: string; about: string }) {
+    return this._http.put<{ userName: string; firstName: string; lastName: string; about: string }>(`http://localhost:5002/profile/update-username-firstname-lastname-about`, user);
+  }
 }

@@ -45,6 +45,9 @@ export class ProfilePageComponent implements OnInit {
 
   error!: any;
 
+  updateUserNameFirstNameLastNameAboutSuccess: boolean = false;
+  updateUserNameFirstNameLastNameAboutError: any;
+
   ngOnInit(): void {
     this.user$ = this._profileService.profile(this._route.snapshot.params['userName']).pipe(
       tap((user) => {
@@ -59,6 +62,21 @@ export class ProfilePageComponent implements OnInit {
         throw errorResponse
       } )
     );
+  }
+  
+  updateUserNameFirstNameLastNameAbout() {
+    this._profileService.updateUserNameFirstNameLastNameAbout(this.personalInfoFormGroup.value).subscribe({
+      next: () => {
+        this.updateUserNameFirstNameLastNameAboutSuccess = true;
+        setTimeout(() => {
+          this.updateUserNameFirstNameLastNameAboutSuccess = false;
+        }, 3000);
+        this.updateUserNameFirstNameLastNameAboutError = null;
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.updateUserNameFirstNameLastNameAboutError = errorResponse.error.message;
+      }
+    });
   }
 
   get userName(): FormControl {

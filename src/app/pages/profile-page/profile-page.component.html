@@ -5,21 +5,11 @@
       <div class="card-body">
           <form [formGroup]="personalInfoFormGroup">
           <label for="userName">User name:</label>
-          <div [class.has-validation]="(userName.invalid && userName.dirty)"
-            [class.has-validation]="error ? error.errorType == 'userName' ? true: false : false"
-            class="input-group mb-3">
+          <div [class.has-validation]="updateUserNameFirstNameLastNameAboutError" class="input-group mb-3">
             <span class="input-group-text">https://mipov.net/</span>
-            <input [class.is-invalid]="(userName.invalid && userName.dirty)"
-              [class.is-invalid]="error ? error.errorType == 'userName' ? true: false : false" class="form-control"
-              id="userName" type="text" formControlName="userName" placeholder="Unique user name">
+            <input [class.is-invalid]="updateUserNameFirstNameLastNameAboutError" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
             <!-- frontend validation -->
-            <ng-container *ngIf="userName.errors">
-              <div *ngIf="userName.errors['pattern']" class="invalid-feedback">Username can only contain letters and
-                numbers, no
-                spaces or special characters.</div>
-            </ng-container>
-            <!-- backend validation -->
-            <div class="invalid-feedback" *ngIf="error?.errorType == 'userName'">{{ error.message }}</div>
+            <div *ngIf="updateUserNameFirstNameLastNameAboutError" class="invalid-feedback">{{ updateUserNameFirstNameLastNameAboutError }}</div>
           </div>
           <label for="name">First name:</label>
           <div class="input-group mb-3">
@@ -35,7 +25,9 @@
           <div class="input-group mb-3">
             <textarea formControlName="about" id="about" class="form-control"></textarea>
           </div>
-          <button class="btn btn-success w-100" [disabled]="personalInfoFormGroup.invalid">Save</button>
+          <!-- success alert -->
+          <div *ngIf="updateUserNameFirstNameLastNameAboutSuccess" class="alert alert-success">🎉 Your personal information successfully updated.</div>
+          <button (click)="updateUserNameFirstNameLastNameAbout()" class="btn btn-success w-100" [disabled]="personalInfoFormGroup.invalid">Save</button>
           </form>
         </div>
       </div>
