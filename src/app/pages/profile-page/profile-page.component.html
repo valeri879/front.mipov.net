@@ -7,23 +7,23 @@
           <label for="userName">User name:</label>
           <div [class.has-validation]="updateUserNameFirstNameLastNameAboutError" class="input-group mb-3">
             <span class="input-group-text">https://mipov.net/</span>
-            <input [class.is-invalid]="updateUserNameFirstNameLastNameAboutError" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
+            <input [class.is-valid]="updateUserNameFirstNameLastNameAboutSuccess" [class.is-invalid]="updateUserNameFirstNameLastNameAboutError" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
             <!-- frontend validation -->
             <div *ngIf="updateUserNameFirstNameLastNameAboutError" class="invalid-feedback">{{ updateUserNameFirstNameLastNameAboutError }}</div>
           </div>
           <label for="name">First name:</label>
           <div class="input-group mb-3">
             <span class="input-group-text">👤</span>
-            <input class="form-control" id="name" type="text" formControlName="firstName">
+            <input [class.is-valid]="updateUserNameFirstNameLastNameAboutSuccess" class="form-control" id="name" type="text" formControlName="firstName">
           </div>
           <label for="lastName">Last name:</label>
           <div class="input-group mb-3">
             <span class="input-group-text">🎩</span>
-            <input class="form-control" id="lastName" type="text" formControlName="lastName">
+            <input [class.is-valid]="updateUserNameFirstNameLastNameAboutSuccess" class="form-control" id="lastName" type="text" formControlName="lastName">
           </div>
           <label for="about">About:</label>
           <div class="input-group mb-3">
-            <textarea formControlName="about" id="about" class="form-control"></textarea>
+            <textarea [class.is-valid]="updateUserNameFirstNameLastNameAboutSuccess" formControlName="about" id="about" class="form-control"></textarea>
           </div>
           <!-- success alert -->
           <div *ngIf="updateUserNameFirstNameLastNameAboutSuccess" class="alert alert-success">🎉 Your personal information successfully updated.</div>
@@ -31,18 +31,24 @@
           </form>
         </div>
       </div>
-      <h2>Email and password</h2>
-      <div class="card">
+      <!-- email card -->
+      <h2>Email</h2>
+      <div class="card mb-3">
         <div class="card-body">
-          <form [formGroup]="emailAndPasswordFormGroup">
             <label for="email">Email:</label>
-            <div [class.has-validation]="error ? error.errorType == 'email' ? true: false : false" class="input-group mb-3">
+            <div class="input-group mb-3">
               <span class="input-group-text">✉️</span>
-              <input [class.is-invalid]="error ? error.errorType == 'email' ? true: false : false" class="form-control"
-                id="email" type="type" formControlName="email">
+              <input [disabled]="true" [value]="email.value" class="form-control" id="email" type="type">
               <!-- backend validation -->
               <div class="invalid-feedback" *ngIf="error?.errorType == 'email'">{{ error.message }}</div>
             </div>
+            <div class="alert alert-warning">You'll be able to change the email address associated with your account. Thank you for your patience!</div>
+        </div>
+      </div>
+      <h2>Password</h2>
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="emailAndPasswordFormGroup">
             <label for="password">Password:</label>
             <div class="input-group mb-3">
               <span class="input-group-text">🔒</span>
@@ -53,7 +59,7 @@
               <span class="input-group-text">🔒</span>
               <input class="form-control" id="newPassword" type="pasword" formControlName="newPassword">
             </div>
-            <button class="btn btn-success w-100" [disabled]="emailAndPasswordFormGroup.invalid">Save</button>
+            <button class="btn btn-success w-100" [disabled]="emailAndPasswordFormGroup.invalid">Change password</button>
           </form>
         </div>
       </div>

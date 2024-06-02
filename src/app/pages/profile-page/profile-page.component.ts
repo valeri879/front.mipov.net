@@ -31,10 +31,10 @@ export class ProfilePageComponent implements OnInit {
   user$!: Observable<User>;
 
   public personalInfoFormGroup: FormGroup = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    about: new FormControl(''),
+    userName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(255), Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
+    firstName: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+    lastName: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+    about: new FormControl('', [Validators.maxLength(35)]),
   });
 
   public emailAndPasswordFormGroup: FormGroup = new FormGroup({
@@ -81,5 +81,9 @@ export class ProfilePageComponent implements OnInit {
 
   get userName(): FormControl {
     return this.personalInfoFormGroup.controls['userName'] as FormControl;
+  }
+
+  get email(): FormControl {
+    return this.emailAndPasswordFormGroup.controls['email'] as FormControl;
   }
 }
