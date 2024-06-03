@@ -59,6 +59,9 @@ export class ProfilePageComponent implements OnInit {
   // success prop for password update
   updatePasswordSuccess!: string | null;
   updatePasswordError!: string | null;
+  // show passwords
+  showOldPassword: boolean = false;
+  showNewPassword: boolean = false;
 
   ngOnInit(): void {
     // set data to form groups

@@ -50,18 +50,26 @@
         <div class="card-body">
           <form [formGroup]="passwordsFormGroup">
             <label for="password">Password:</label>
-            <div class="input-group mb-3">
+            <div class="input-group">
               <span class="input-group-text">🔒</span>
-              <input [class.is-valid]="updatePasswordSuccess" [class.is-invalid]="updatePasswordError" class="form-control" id="password" type="password" formControlName="oldPassword">
+              <input [class.is-valid]="updatePasswordSuccess" [class.is-invalid]="updatePasswordError" class="form-control" id="password" [type]="showOldPassword ? 'text' : 'password'" formControlName="oldPassword">
+            </div>
+            <div class="form-check mb-3">
+                <input (change)="showOldPassword = !showOldPassword" class="form-check-input" type="checkbox" value="" id="showOldPassword">
+                <label class="form-check-label text-primary user-select-none" for="showOldPassword"><u>{{ !showOldPassword ? 'Show' : 'Hide'}} password</u></label>
             </div>
 
             <!-- invalid password message -->
             <div *ngIf="updatePasswordError" class="alert alert-danger">{{ updatePasswordError }}</div>
 
             <label for="newPassword">New password:</label>
-            <div class="input-group mb-3">
+            <div class="input-group">
               <span class="input-group-text">🔒</span>
-              <input [class.is-valid]="updatePasswordSuccess" class="form-control" id="newPassword" type="password" formControlName="newPassword">
+              <input [class.is-valid]="updatePasswordSuccess" class="form-control" id="newPassword" [type]="showNewPassword ? 'text' : 'password'" formControlName="newPassword">
+            </div>
+            <div class="form-check mb-3">
+                <input (change)="showNewPassword = !showNewPassword" class="form-check-input" type="checkbox" value="" id="showNewPassword">
+                <label class="form-check-label text-primary user-select-none" for="showNewPassword"><u>{{ !showNewPassword ? 'Show' : 'Hide'}} new password</u></label>
             </div>
 
             <!-- success password message -->
