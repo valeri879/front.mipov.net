@@ -27,7 +27,7 @@
           </div>
           <!-- success alert -->
           <div *ngIf="updateUserNameFirstNameLastNameAboutSuccess" class="alert alert-success">🎉 Your personal information successfully updated.</div>
-          <button (click)="updateUserNameFirstNameLastNameAbout()" class="btn btn-success w-100" [disabled]="personalInfoFormGroup.invalid">Save</button>
+          <button (click)="updateUserNameFirstNameLastNameAbout()" class="btn btn-success w-100" [disabled]="personalInfoFormGroup.invalid || updateUserNameFirstNameLastNameAboutSuccess">Save</button>
           </form>
         </div>
       </div>
@@ -50,7 +50,7 @@
         <div class="card-body">
           <form [formGroup]="passwordsFormGroup">
             <label for="password">Password:</label>
-            <div class="input-group">
+            <div class="input-group mb-2">
               <span class="input-group-text">🔒</span>
               <input [class.is-valid]="updatePasswordSuccess" [class.is-invalid]="updatePasswordError" class="form-control" id="password" [type]="showOldPassword ? 'text' : 'password'" formControlName="oldPassword">
             </div>
@@ -63,7 +63,7 @@
             <div *ngIf="updatePasswordError" class="alert alert-danger">{{ updatePasswordError }}</div>
 
             <label for="newPassword">New password:</label>
-            <div class="input-group">
+            <div class="input-group mb-2">
               <span class="input-group-text">🔒</span>
               <input [class.is-valid]="updatePasswordSuccess" class="form-control" id="newPassword" [type]="showNewPassword ? 'text' : 'password'" formControlName="newPassword">
             </div>
@@ -75,7 +75,7 @@
             <!-- success password message -->
             <div *ngIf="updatePasswordSuccess" class="alert alert-success">{{ updatePasswordSuccess }}</div>
 
-            <button class="btn btn-success w-100" (click)="updatePassword()" [disabled]="passwordsFormGroup.invalid">Change password</button>
+            <button class="btn btn-success w-100" (click)="updatePassword()" [disabled]="passwordsFormGroup.invalid || updatePasswordSuccess">Change password</button>
           </form>
         </div>
       </div>

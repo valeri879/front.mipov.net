@@ -21,6 +21,7 @@ export class SignUpPageComponent implements OnInit{
 
   public form!: FormGroup;
   public error!: { message: string, errorType: string };
+  public showPassword: boolean = false;
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -30,11 +31,12 @@ export class SignUpPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = new FormGroup({
-    userName: new FormControl('valeri879', [Validators.required, Validators.minLength(2), Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
-    firstName: new FormControl('Valerian', [Validators.required]),
-    lastName: new FormControl('Kharitonashvili', [Validators.required]),
-    email: new FormControl('val@do.com', [Validators.required, Validators.email]),
-    password: new FormControl('123123', [Validators.required, Validators.minLength(6), Validators.maxLength(55)]),
+      userName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(55)]),
+      about: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(55)]),
   });
 
   }

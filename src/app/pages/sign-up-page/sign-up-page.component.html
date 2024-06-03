@@ -10,7 +10,7 @@
             <form [formGroup]="form">
                 <label for="userName">User name:</label>
                 <div [class.has-validation]="(userName.invalid && userName.dirty)" [class.has-validation]="error ? error.errorType == 'userName' ? true: false : false" class="input-group mb-3">
-                    <span class="input-group-text">🔗</span>
+                    <span class="input-group-text">https://mipov.net/</span>
                     <input [class.is-invalid]="(userName.invalid && userName.dirty)" [class.is-invalid]="error ? error.errorType == 'userName' ? true: false : false" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
                     <!-- frontend validation -->
                     <ng-container *ngIf="userName.errors">
@@ -37,11 +37,19 @@
                     <div class="invalid-feedback" *ngIf="error?.errorType == 'email'">{{ error.message }}</div>
                 </div>
                 <label for="password">Password</label>
-                <div class="input-group mb-3">
+                <div class="input-group mb-2">
                     <span class="input-group-text">🔒</span>
-                    <input class="form-control" id="password" type="password" formControlName="password">
+                    <input class="form-control" id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password">
                 </div>
-                <div class="mb-3">⚠️ By <u>signing up</u> on this site, you agree to our <a routerLink="/privacy-policy">privacy policy.</a></div>
+                <div class="form-check mb-3">
+                    <input (change)="showPassword = !showPassword" class="form-check-input" type="checkbox" value="" id="showNewPassword">
+                    <label class="form-check-label text-primary user-select-none" for="showNewPassword"><u>{{ !showPassword ? 'Show' : 'Hide'}} password</u></label>
+                </div>
+                <label for="about">About</label>
+                <div class="input-group mb-3">
+                    <textarea class="form-control" id="about" formControlName="about"></textarea>
+                </div>
+                <div class="mb-3">⚠️ By <b>signing up</b> on this site, you agree to our <a routerLink="/privacy-policy">privacy policy.</a></div>
                 <button class="btn btn-success w-100" [disabled]="form.invalid" (click)="signUp()">Sign up</button>
             </form>
         </div>
