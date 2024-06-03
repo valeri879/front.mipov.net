@@ -48,18 +48,26 @@
       <h2>Password</h2>
       <div class="card">
         <div class="card-body">
-          <form [formGroup]="emailAndPasswordFormGroup">
+          <form [formGroup]="passwordsFormGroup">
             <label for="password">Password:</label>
             <div class="input-group mb-3">
               <span class="input-group-text">🔒</span>
-              <input class="form-control" id="password" type="pasword" formControlName="oldPassword">
+              <input [class.is-valid]="updatePasswordSuccess" [class.is-invalid]="updatePasswordError" class="form-control" id="password" type="password" formControlName="oldPassword">
             </div>
+
+            <!-- invalid password message -->
+            <div *ngIf="updatePasswordError" class="alert alert-danger">{{ updatePasswordError }}</div>
+
             <label for="newPassword">New password:</label>
             <div class="input-group mb-3">
               <span class="input-group-text">🔒</span>
-              <input class="form-control" id="newPassword" type="pasword" formControlName="newPassword">
+              <input [class.is-valid]="updatePasswordSuccess" class="form-control" id="newPassword" type="password" formControlName="newPassword">
             </div>
-            <button class="btn btn-success w-100" [disabled]="emailAndPasswordFormGroup.invalid">Change password</button>
+
+            <!-- success password message -->
+            <div *ngIf="updatePasswordSuccess" class="alert alert-success">{{ updatePasswordSuccess }}</div>
+
+            <button class="btn btn-success w-100" (click)="updatePassword()" [disabled]="passwordsFormGroup.invalid">Change password</button>
           </form>
         </div>
       </div>

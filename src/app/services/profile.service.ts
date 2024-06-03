@@ -17,4 +17,8 @@ export class ProfileService {
   updateUserNameFirstNameLastNameAbout(user: { userName: string; firstName: string; lastName: string; about: string }) {
     return this._http.put<{ userName: string; firstName: string; lastName: string; about: string }>(`http://localhost:5002/profile/update-username-firstname-lastname-about`, user);
   }
+
+  updatePassword(passwords: { oldPassword: string; newPassword: string; }): Observable<{ message: string }> {
+    return this._http.put<{ message: string }>(`http://localhost:5002/profile/update-password`, passwords);
+  }
 }

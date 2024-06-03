@@ -29,30 +29,43 @@ export class ProfilePageComponent implements OnInit {
 
   public authenticationService = inject(AuthenticationService);
   user$!: Observable<User>;
-
+  // personal info form group
   public personalInfoFormGroup: FormGroup = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(255), Validators.pattern(new RegExp('^[a-zA-Z0-9]+$'))]),
     firstName: new FormControl('', [Validators.required, Validators.maxLength(255)]),
     lastName: new FormControl('', [Validators.required, Validators.maxLength(255)]),
     about: new FormControl('', [Validators.maxLength(35)]),
   });
-
-  public emailAndPasswordFormGroup: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    oldPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
+  // password change form group
+  public passwordsFormGroup: FormGroup = new FormGroup({
+    oldPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
+    newPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
+  });
+  // email change form group
+  public emailsFormGroup: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(255)]),
+    // TO DO: implement this form control after backend finishes
+    newEmail: new FormControl('', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(255)]),
   });
 
   error!: any;
 
+  // success prop for personal info
   updateUserNameFirstNameLastNameAboutSuccess: boolean = false;
+  // error prop for personal info
   updateUserNameFirstNameLastNameAboutError: any;
 
+
+  // success prop for password update
+  updatePasswordSuccess!: string | null;
+  updatePasswordError!: string | null;
+
   ngOnInit(): void {
+    // set data to form groups
     this.user$ = this._profileService.profile(this._route.snapshot.params['userName']).pipe(
       tap((user) => {
+        this.emailsFormGroup.patchValue(user);
         this.personalInfoFormGroup.patchValue(user);
-        this.emailAndPasswordFormGroup.patchValue(user);
         this._title.setTitle(`mipov.net - ${user.userName}`)
       }),
       catchError((errorResponse: HttpErrorResponse) => {
@@ -64,6 +77,25 @@ export class ProfilePageComponent implements OnInit {
     );
   }
   
+  // update password method
+  updatePassword() {
+    this._profileService.updatePassword(this.passwordsFormGroup.value).subscribe({
+      next: ({ message }) => {
+        this.updatePasswordSuccess = message;
+        setTimeout(() => {
+          this.updatePasswordSuccess = null;
+          this.passwordsFormGroup.reset();
+        }, 3000);
+        this.updatePasswordError = null;
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.updatePasswordError = errorResponse.error.message;
+        console.log(errorResponse);
+      }
+    })
+  }
+  
+  // update personal info method
   updateUserNameFirstNameLastNameAbout() {
     this._profileService.updateUserNameFirstNameLastNameAbout(this.personalInfoFormGroup.value).subscribe({
       next: () => {
@@ -79,11 +111,13 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  // user name getter
   get userName(): FormControl {
     return this.personalInfoFormGroup.controls['userName'] as FormControl;
   }
-
+  
+  // email getter
   get email(): FormControl {
-    return this.emailAndPasswordFormGroup.controls['email'] as FormControl;
+    return this.emailsFormGroup.controls['email'] as FormControl;
   }
 }
