@@ -1,0 +1,14 @@
+<div class="container">
+    <ng-container *ngIf="user$ | async as user">
+        <div style="gap: 15px;" class="card card-body d-flex flex-column align-items-center">
+            <div class="border bg-light rounded-circle d-flex align-items-center font-weight-bold justify-content-center" style="width: 100px; height: 100px; font-size: 48px;">{{ user.firstName.slice(0,1) }}</div>
+            {{ '@' + user.userName }}
+            <div class="text-secondary">{{ user.about }}</div>
+            <a [href]="link.link" target="_blank" class="card w-100 mb-3" *ngFor="let link of user.links">
+                <div class="card-body d-flex justify-content-center">
+                    {{ link.linkTitle }}
+                </div>
+            </a>
+        </div>
+    </ng-container>
+</div>

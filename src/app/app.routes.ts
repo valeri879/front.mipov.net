@@ -6,6 +6,7 @@ import { authGuard } from './guards/auth.guard';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { PrivacyPolicyPageComponent } from './pages/privacy-policy-page/privacy-policy-page.component';
 import { loginGuard } from './guards/login.guard';
+import { LinksPageComponent } from './pages/links-page/links-page.component';
 
 export const routes: Routes = [
  { path: '', component: SignUpPageComponent, title: 'Share your social accounts profiles with mipov.net', canActivate: [ loginGuard ] },
@@ -13,5 +14,6 @@ export const routes: Routes = [
  { path: 'error', component: ErrorPageComponent, title: 'Error' },
  { path: 'privacy-policy', component: PrivacyPolicyPageComponent, title: 'Privacy policy' },
  { path: 'profile', component: ProfilePageComponent, title: 'Privacy policy' },
+ { path: 'links', component: LinksPageComponent, title: 'Links', canActivate: [  ] },
 //  { path: ':userName', component: ProfilePageComponent, title: 'profile'}
 ];

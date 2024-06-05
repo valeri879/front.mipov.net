@@ -8,4 +8,12 @@ export interface User {
     password: string;
     verificationCode: string;
     date: string;
+    about?: string;
+    links?: Link[];
+}
+
+interface Link {
+    linkTitle: string;
+    link: string;
+    linkIcon: string;
 }
