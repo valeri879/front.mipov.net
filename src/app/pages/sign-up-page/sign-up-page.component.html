@@ -9,10 +9,9 @@
             </p>
             <form [formGroup]="form">
                 <label for="userName">User name:</label>
-                <div [class.has-validation]="(userName.invalid && userName.dirty)" [class.has-validation]="error ? error.errorType == 'userName' ? true: false : false" class="input-group mb-3">
+                <div [class.has-validation]="(userName.invalid && userName.dirty) || error?.errorType == 'userName'" class="input-group has-validation mb-3">
                     <span class="input-group-text">https://mipov.net/</span>
-                    <input [class.is-invalid]="(userName.invalid && userName.dirty)" [class.is-invalid]="error ? error.errorType == 'userName' ? true: false : false" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
-                    {{ error | json }}
+                    <input [class.is-invalid]="(userName.invalid && userName.dirty) || error?.errorType == 'userName'" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
                     <!-- frontend validation -->
                     <ng-container *ngIf="userName.errors">
                         <div *ngIf="userName.errors['pattern']" class="invalid-feedback">Username can only contain letters and numbers, no spaces or special characters.</div>

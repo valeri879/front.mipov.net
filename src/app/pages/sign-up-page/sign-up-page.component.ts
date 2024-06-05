@@ -3,8 +3,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router, RouterModule } from '@angular/router';
 import { JsonPipe, NgIf } from '@angular/common';
-import { map, switchMap } from 'rxjs';
-import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -13,7 +11,6 @@ import { ProfileService } from '../../services/profile.service';
   styleUrl: './sign-up-page.component.scss', imports: [
     ReactiveFormsModule,
     RouterModule,
-    JsonPipe,
     NgIf
   ],
 })
@@ -25,7 +22,6 @@ export class SignUpPageComponent implements OnInit{
 
   constructor(
     private _authenticationService: AuthenticationService,
-    private _profileService: ProfileService,
     private _router: Router
   ) {}
 
@@ -36,23 +32,16 @@ export class SignUpPageComponent implements OnInit{
       lastName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(55)]),
-      about: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(55)]),
+      about: new FormControl('', [Validators.required, Validators.maxLength(55)]),
   });
 
   }
 
   signUp() {
-    this._authenticationService.signUp(this.form.value).pipe(
-      switchMap(data => this._profileService.profile().pipe(map(( { userName } ) => {
-        return {
-          userName,
-          ...data
-        }
-      })))
-    ).subscribe({
-      next: ({ accessToken, userName }) => {
+    this._authenticationService.signUp(this.form.value).subscribe({
+      next: ({ accessToken }) => {
         if (accessToken) {
-            this._router.navigateByUrl(userName);
+            this._router.navigateByUrl('/profile');
         };
       },
       error: ({ error }) => this.error = error
