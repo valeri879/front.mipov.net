@@ -9,7 +9,7 @@ export interface User {
     verificationCode: string;
     date: string;
     about?: string;
-    links?: Link[];
+    links: Link[];
 }
 
 interface Link {

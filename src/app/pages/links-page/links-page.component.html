@@ -4,39 +4,72 @@
         <div [formGroup]="linksFormGroup" class="col-md-8">
             <div formArrayName="links">
                 <h1>Links</h1>
-                <div *ngFor="let group of links.controls; let i=index">
-                    <div [formGroupName]="i" class="row gx-1 mb-3">
+                <div *ngFor="let group of links.controls; let i = index">
+                    <div [formGroupName]="i" class="row gx-2 mb-3">
                         <div class="col-2">
-                            <div class="form-floating">
-                                <input type="text" id="icon" placeholder="Link icon" class="form-control" formControlName="linkIcon">
-                                <label for="icon">Icon</label>
+                            <div class="form-group">
+                                <label for="icon-{{ i }}">Icon</label>
+                                <input type="text" id="icon-{{ i }}" placeholder="Link icon" class="form-control" formControlName="linkIcon">
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="form-floating">
-                                <input type="text" id="linkTitle" placeholder="Link icon" class="form-control" formControlName="linkTitle">
-                                <label for="linkTitle">Link Title</label>
+                            <div class="form-group">
+                                <label for="linkTitle-{{ i }}">Link title</label>
+                                <input type="text" id="linkTitle-{{ i }}" placeholder="Link icon" class="form-control" formControlName="linkTitle">
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-floating">
-                                <input type="text" id="link" placeholder="Actual link" class="form-control" formControlName="link">
-                                <label for="icon">Link</label>
+                            <div class="form-group">
+                                <label for="link-{{ i }}">Profile link</label>
+                                <div class="row gx-2">
+                                    <div class="col-9">
+                                        <input type="text" id="link-{{ i }}" placeholder="Actual link" class="form-control" formControlName="link">
+                                    </div>
+                                    <div class="col-3">
+                                        <button (click)="removeLink(i)" class="btn w-100 btn-danger">Delete</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
+            <div [formGroup]="addLinksFormGroup" class="row gx-2 mb-3">
+                <h2>Add new profile link</h2>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="icon">Icon</label>
+                        <input type="text" id="icon" placeholder="Link icon" class="form-control" formControlName="linkIcon">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="linkTitle">Link title</label>
+                        <input type="text" id="linkTitle" placeholder="Link icon" class="form-control" formControlName="linkTitle">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="link">Profile link</label>
+                        <div class="row gx-1">
+                            <div class="col-9">
+                                <input type="text" id="link" placeholder="Actual your profile link" class="form-control" formControlName="link">
+                            </div>
+                            <div class="col-3">
+                                <button (click)="addLinks(addLinksFormGroup.value)" [disabled]="addLinksFormGroup.invalid" class="btn btn-primary w-100">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
-            <div style="gap: 15px;" class="card card-body d-flex flex-column align-items-center">
-                <div class="border bg-light rounded-circle d-flex align-items-center font-weight-bold justify-content-center" style="width: 100px; height: 100px; font-size: 48px;">{{ user.firstName.slice(0,1) }}</div>
+            <div style="gap: 15px;" class="card bg-light card-body d-flex flex-column align-items-center">
+                <div class="border bg-dark text-white rounded-circle d-flex align-items-center font-weight-bold justify-content-center" style="width: 100px; height: 100px; font-size: 48px;">{{ user.userName.slice(0,1) }}</div>
                 {{ '@' + user.userName }}
                 <div class="text-secondary">{{ user.about }}</div>
-                <a [href]="link.link" target="_blank" class="card w-100 mb-3" *ngFor="let link of user.links">
-                    <div class="card-body d-flex justify-content-center">
-                        {{ link.linkTitle }}
-                    </div>
+                <a  target="_blank" style="text-decoration: none;" class="card w-100" [href]="link['link']" *ngFor="let link of linksFormGroup.value.links">
+                    <div class="card-body text-decoration-none d-flex justify-content-center">{{ link['linkTitle'] }}</div>
                 </a>
             </div>
         </div>

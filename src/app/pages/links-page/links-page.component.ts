@@ -3,7 +3,7 @@ import { ProfileService } from '../../services/profile.service';
 import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { User } from '../../interfaces/user';
-import { FormArray, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-links-page',
@@ -19,34 +19,47 @@ import { FormArray, FormBuilder, FormControl, ReactiveFormsModule } from '@angul
   styleUrl: './links-page.component.scss'
 })
 export class LinksPageComponent implements OnInit {
-  profileService = inject(ProfileService);
-  formBuilder = inject(FormBuilder);
+  private _profileService = inject(ProfileService);
+  private _formBuilder = inject(FormBuilder);
 
-  linksFormGroup = this.formBuilder.group({
-    links: new FormArray([])
-  });
+  public linksFormGroup = this._formBuilder.group({ links: new FormArray([]) });
+  public addLinksFormGroup: FormGroup = this._linksGroup();
 
   user$!: Observable<User>;
   
-  log(e: any) {
-    console.log(e)
-  }
   ngOnInit(): void {
-    this.user$ = this.profileService.profile().pipe(
+    this.user$ = this._profileService.profile().pipe(
       tap(({ links }) => {
-        links?.forEach(linksData => {
-          this.links.push(this.formBuilder.group({
-            link: new FormControl(linksData.link),
-            linkTitle: new FormControl(linksData.linkTitle),
-            linkIcon: new FormControl(linksData.linkIcon),
-          }))
+        links.forEach(linksData => {
+          this.links.push(this._linksGroup(linksData.link, linksData.linkTitle, linksData.linkIcon))
         });
-        console.log(this.links.value);
       })
     ); 
   }
 
+  private _linksGroup(link: string = '', linktitle: string = '', linkIcon: string = ''): FormGroup {
+    return new FormGroup({
+      link: new FormControl(link, [Validators.required]),
+      linkTitle: new FormControl(linktitle, [Validators.required]),
+      linkIcon: new FormControl(linkIcon, [Validators.required]),
+    });
+  }
+
   get links(): FormArray {
     return this.linksFormGroup.get('links') as FormArray;
+  }
+
+  addLinks(data: any) {
+    const group = this._linksGroup(data.link, data.linkTitle, data.linkIcon);
+    this.links.push(group);
+    this.addLinksFormGroup.reset();
+    // update links
+    this._profileService.updateLinks(this.linksFormGroup.value).subscribe();
+  }
+
+  removeLink(index: number) {
+    this.links.removeAt(index);
+    // update links
+    this._profileService.updateLinks(this.linksFormGroup.value).subscribe();
   }
 }

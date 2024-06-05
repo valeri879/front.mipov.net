@@ -21,4 +21,8 @@ export class ProfileService {
   updatePassword(passwords: { oldPassword: string; newPassword: string; }): Observable<{ message: string }> {
     return this._http.put<{ message: string }>(`http://localhost:5002/profile/update-password`, passwords);
   }
+  
+  updateLinks(data: any): Observable<{ message: string }> {
+    return this._http.put<{ message: string }>(`http://localhost:5002/profile/update-links`, data);
+  }
 }
