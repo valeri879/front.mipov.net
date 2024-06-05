@@ -12,8 +12,8 @@ import { refreshTokenInterceptor } from './interceptors/refresh-token.intercepto
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
+      withInterceptors([withCredentialInterceptor, accessTokenInterceptor, refreshTokenInterceptor]),
       withFetch(),
-      withInterceptors([withCredentialInterceptor, accessTokenInterceptor, refreshTokenInterceptor])
     ),
     provideRouter(routes),
     provideClientHydration(),

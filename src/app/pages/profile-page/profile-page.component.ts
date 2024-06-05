@@ -71,12 +71,13 @@ export class ProfilePageComponent implements OnInit {
         this.personalInfoFormGroup.patchValue(user);
         this._title.setTitle(`mipov.net - ${user.userName}`)
       }),
-      catchError((errorResponse: HttpErrorResponse) => {
+      /* catchError((errorResponse: HttpErrorResponse) => {
+        console.log(123)
         if (errorResponse.status === 404) {
           this._router.navigate(['/error'], { queryParams: { error: errorResponse.error.message } });
         }
         throw errorResponse
-      } )
+      } ) */
     );
   }
   

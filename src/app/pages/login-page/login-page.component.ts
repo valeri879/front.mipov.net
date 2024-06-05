@@ -33,19 +33,12 @@ export class LoginPageComponent {
   public error!: { message: string };
 
   login() {
-    this._authenticationService.logIn(this.form.value).pipe(
-      switchMap(data => this._profileService.profile().pipe(map(( { userName } ) => {
-        return {
-          userName,
-          ...data
-        }
-      })))
-    ).subscribe({
-      next: ({ accessToken, userName }) => {
+    this._authenticationService.logIn(this.form.value).subscribe({
+      next: ({ accessToken }) => {
         if (accessToken) {
           this.success = true;
           setTimeout(() => {
-            this._router.navigateByUrl(userName);
+            this._router.navigateByUrl('/profile');
           }, 1000);
         };
       },

@@ -37,8 +37,8 @@ export class AuthenticationService {
 
   logOut() {
     this._cookieService.deleteAll();
-    this.isLoggedIn$.next(false);
     this._router.navigateByUrl('/');
+    this.isLoggedIn$.next(false);
   }
 
   private _isLoggedIn()  {

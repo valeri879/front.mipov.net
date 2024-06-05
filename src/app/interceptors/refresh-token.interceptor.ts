@@ -2,12 +2,10 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
-  const route = inject(ActivatedRoute);
+  console.log('refresh token')
   const authenticationService = inject(AuthenticationService);
-
   return next(req).pipe(
     catchError(error => {
       if (error.status === 401) {
@@ -22,7 +20,7 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
             // If the token refresh also fails, propagate the original error
             throw refreshTokenError;
           })
-        )
+        );
       }
       throw error;
     })
