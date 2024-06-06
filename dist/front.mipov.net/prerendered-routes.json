@@ -1,0 +1,9 @@
+{
+  "routes": [
+    "/",
+    "/error",
+    "/login",
+    "/privacy-policy",
+    "/profile"
+  ]
+}
