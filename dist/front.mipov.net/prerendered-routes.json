@@ -2,6 +2,7 @@
   "routes": [
     "/",
     "/error",
+    "/links",
     "/login",
     "/privacy-policy",
     "/profile"

@@ -2,6 +2,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-privacy-policy-page',
@@ -16,6 +17,6 @@ import { Observable } from 'rxjs';
 export class PrivacyPolicyPageComponent {
   http = inject(HttpClient);
 
-  data$: Observable<any> = this.http.get('http://localhost:5002/privacy-policy');
+  data$: Observable<any> = this.http.get(`${environment.apiUrl}/privacy-policy`);
 }
 

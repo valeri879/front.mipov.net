@@ -4,6 +4,7 @@ import { User } from '../interfaces/user';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,19 +21,19 @@ export class AuthenticationService {
   }
 
   signUp(user: User): Observable<{ accessToken: string; refreshToken: string }>  {
-    return this._http.post<{ accessToken: string; refreshToken: string }>('http://localhost:5002/sign-up', user).pipe(
+    return this._http.post<{ accessToken: string; refreshToken: string }>(`${environment.apiUrl}/sign-up`, user).pipe(
       tap(() => this.isLoggedIn$.next(true))
     );
   }
 
   logIn(user: { email: string; password: string }): Observable<{ accessToken: string; refreshToken: string }> {
-    return this._http.post<{ accessToken: string; refreshToken: string }>('http://localhost:5002/login', user).pipe(
+    return this._http.post<{ accessToken: string; refreshToken: string }>(`${environment.apiUrl}/login`, user).pipe(
       tap(() => this.isLoggedIn$.next(true))
     );
   }
 
   refreshToken(): Observable<{ accessToken: string; refreshToken: string }> {
-    return this._http.get<{ accessToken: string; refreshToken: string }>('http://localhost:5002/token');
+    return this._http.get<{ accessToken: string; refreshToken: string }>(`${environment.apiUrl}/token`);
   }
 
   logOut() {
