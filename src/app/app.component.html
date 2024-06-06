@@ -3,8 +3,8 @@
         <div class="container">
             <div>
                 <a routerLink="/" class="navbar-brand mb-0 h1"><b>mipov.net</b></a>
-                <a routerLink="/about" class="px-2">About</a>
-                <a routerLink="/help" class="px-2">Help</a>
+                <!-- <a routerLink="/about" class="px-2">About</a>
+                <a routerLink="/help" class="px-2">Help</a> -->
                 <a routerLink="/privacy-policy" class="px-2">Privacy policy</a>
             </div>
             <ng-container *ngIf="authenticationService.isLoggedIn$ | async; else signUpButton">

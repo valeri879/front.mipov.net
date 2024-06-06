@@ -11,11 +11,10 @@ import { PublicPageComponent } from './pages/public-page/public-page.component';
 
 export const routes: Routes = [
  { path: '', component: SignUpPageComponent, title: 'Share your social accounts profiles with mipov.net', canActivate: [ loginGuard ] },
- { path: 'login', component: LoginPageComponent, title: 'Login to mipov.net' },
+ { path: 'login', component: LoginPageComponent, title: 'Login to mipov.net', canActivate: [ loginGuard ] },
  { path: 'error', component: ErrorPageComponent, title: 'Error' },
  { path: 'privacy-policy', component: PrivacyPolicyPageComponent, title: 'Privacy policy' },
- { path: 'profile', component: ProfilePageComponent, title: 'Privacy policy' },
- { path: 'profile', component: ProfilePageComponent, title: 'Privacy policy' },
- { path: 'links', component: LinksPageComponent, title: 'Links', canActivate: [  ] },
+ { path: 'profile', component: ProfilePageComponent, title: 'Privacy policy', canActivate: [ authGuard ] },
+ { path: 'links', component: LinksPageComponent, title: 'Links', canActivate: [ authGuard ] },
  { path: ':userName', component: PublicPageComponent, title: 'Links' },
 ];
