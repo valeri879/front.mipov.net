@@ -4,6 +4,8 @@ import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-links-page',
@@ -13,7 +15,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Va
     NgIf,
     NgFor,
     JsonPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './links-page.component.html',
   styleUrl: './links-page.component.scss'
@@ -22,8 +25,10 @@ export class LinksPageComponent implements OnInit {
   private _profileService = inject(ProfileService);
   private _formBuilder = inject(FormBuilder);
 
-  public linksFormGroup = this._formBuilder.group({ links: new FormArray([]) });
+  public linksFormGroup = this._formBuilder.group({ links: new FormArray([], [Validators.required]) });
   public addLinksFormGroup: FormGroup = this._linksGroup();
+
+  public linksUpdatedSuccess: any;
 
   user$!: Observable<User>;
   
@@ -53,13 +58,23 @@ export class LinksPageComponent implements OnInit {
     const group = this._linksGroup(data.link, data.linkTitle, data.linkIcon);
     this.links.push(group);
     this.addLinksFormGroup.reset();
-    // update links
-    this._profileService.updateLinks(this.linksFormGroup.value).subscribe();
   }
 
   removeLink(index: number) {
     this.links.removeAt(index);
-    // update links
-    this._profileService.updateLinks(this.linksFormGroup.value).subscribe();
+  }
+
+  save() {
+    this._profileService.updateLinks(this.linksFormGroup.value).subscribe({
+      next: ({ message }) => {
+        this.linksUpdatedSuccess = message;
+        setTimeout(() => {
+          this.linksUpdatedSuccess = null;
+        }, 1500);
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.error(errorResponse.error.message);
+      }
+    });
   }
 }

@@ -1,11 +1,10 @@
 <div class="dropdown">
     <button (click)="toggle = !toggle" class="btn btn-sm btn-primary dropdown-toggle" type="button">
-        ⚙️ Settings
+        ⚙️ User
     </button>
-    <ul style="right: 0;" [class.show]="toggle" class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" routerLink="/profile">👤 Profile</a></li>
-        <li><a class="dropdown-item" href="#">🔗 Links</a></li>
-        <li><a class="dropdown-item" routerLink="/links">👀 View as guest</a></li>
+    <ul style="right: 0;" [class.show]="toggle" class="dropdown-menu dropdown-menu-end" (click)="toggle = !toggle">
+        <li><a routerLinkActive="fw-bold" class="dropdown-item" routerLink="/profile">👤 Profile</a></li>
+        <li><a routerLinkActive="fw-bold" class="dropdown-item" routerLink="/links">🔗 Links</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><div (click)="authenticationService.logOut()" style="cursor: pointer;" class="dropdown-item">🚪 Sign out</div></li>
     </ul>

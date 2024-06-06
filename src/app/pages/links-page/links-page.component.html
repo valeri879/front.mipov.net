@@ -68,10 +68,16 @@
                 <div class="border bg-dark text-white rounded-circle d-flex align-items-center font-weight-bold justify-content-center" style="width: 100px; height: 100px; font-size: 48px;">{{ user.userName.slice(0,1) }}</div>
                 {{ '@' + user.userName }}
                 <div class="text-secondary">{{ user.about }}</div>
-                <a  target="_blank" style="text-decoration: none;" class="card w-100" [href]="link['link']" *ngFor="let link of linksFormGroup.value.links">
+                <a  target="_blank" style="text-decoration: none;" [class.bg-success-subtle]="linksUpdatedSuccess" [class.border-success]="linksUpdatedSuccess" class="card w-100" [href]="link['link']" *ngFor="let link of linksFormGroup.value.links">
                     <div class="card-body text-decoration-none d-flex justify-content-center">{{ link['linkTitle'] }}</div>
                 </a>
+                <!-- update success -->
+                <div class="alert w-100 mb-0 alert-success" *ngIf="linksUpdatedSuccess">{{ linksUpdatedSuccess }}</div>
+                <!-- for save error alert -->
+                <div class="alert w-100 mb-0 alert-warning" *ngIf="linksFormGroup.invalid">⚠️️ Please add at least one profile link to save</div>
+                <button (click)="save()" [disabled]="linksFormGroup.invalid" class="btn btn-primary w-100">Save</button>
             </div>
+            <a routerLink="/{{ user.userName }}" class="btn btn-link w-100">View as guest</a>
         </div>
     </div>
     </ng-container>

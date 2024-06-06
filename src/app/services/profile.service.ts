@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  
   private _http = inject(HttpClient);
 
   profile(userName: string = ''): Observable<User> {
