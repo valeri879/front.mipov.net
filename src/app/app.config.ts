@@ -8,11 +8,12 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { withCredentialInterceptor } from './interceptors/with-credential.interceptor';
 import { accessTokenInterceptor } from './interceptors/access-token.interceptor';
 import { refreshTokenInterceptor } from './interceptors/refresh-token.interceptor';
+import { transferStateInterceptor } from './interceptors/transfer-state.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
-      withInterceptors([withCredentialInterceptor, accessTokenInterceptor, refreshTokenInterceptor]),
+      withInterceptors([withCredentialInterceptor, accessTokenInterceptor, refreshTokenInterceptor, transferStateInterceptor]),
       withFetch(),
     ),
     provideRouter(routes),
