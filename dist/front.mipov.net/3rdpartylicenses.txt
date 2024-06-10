@@ -1,6 +1,6 @@
 
 --------------------------------------------------------------------------------
-Package: @angular/common
+Package: @angular/animations
 License: "MIT"
 
 
@@ -10,7 +10,7 @@ License: "MIT"
 
 
 --------------------------------------------------------------------------------
-Package: @angular/router
+Package: ngx-cookie-service
 License: "MIT"
 
 
@@ -20,17 +20,12 @@ License: "MIT"
 
 
 --------------------------------------------------------------------------------
-Package: ngx-cookie-service
+Package: @angular/router
 License: "MIT"
 
 
 --------------------------------------------------------------------------------
-Package: @angular/animations
-License: "MIT"
-
-
---------------------------------------------------------------------------------
-Package: @angular/core
+Package: @angular/common
 License: "MIT"
 
 
@@ -257,6 +252,11 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
 LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
+--------------------------------------------------------------------------------
+Package: @angular/core
+License: "MIT"
+
+
 --------------------------------------------------------------------------------
 Package: zone.js
 License: "MIT"
