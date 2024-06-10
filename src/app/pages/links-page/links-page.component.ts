@@ -36,17 +36,17 @@ export class LinksPageComponent implements OnInit {
     this.user$ = this._profileService.profile().pipe(
       tap(({ links }) => {
         links.forEach(linksData => {
-          this.links.push(this._linksGroup(linksData.link, linksData.linkTitle, linksData.linkIcon))
+          this.links.push(this._linksGroup(linksData.link, linksData.linkTitle/* , linksData.linkIcon */))
         });
       })
     ); 
   }
 
-  private _linksGroup(link: string = '', linktitle: string = '', linkIcon: string = ''): FormGroup {
+  private _linksGroup(link: string = '', linktitle: string = ''/* , linkIcon: string = '' */): FormGroup {
     return new FormGroup({
       link: new FormControl(link, [Validators.required]),
       linkTitle: new FormControl(linktitle, [Validators.required]),
-      linkIcon: new FormControl(linkIcon, [Validators.required]),
+      // linkIcon: new FormControl(linkIcon, [Validators.required]),
     });
   }
 
@@ -55,7 +55,7 @@ export class LinksPageComponent implements OnInit {
   }
 
   addLinks(data: any) {
-    const group = this._linksGroup(data.link, data.linkTitle, data.linkIcon);
+    const group = this._linksGroup(data.link, data.linkTitle/* , data.linkIcon */);
     this.links.push(group);
     this.addLinksFormGroup.reset();
   }

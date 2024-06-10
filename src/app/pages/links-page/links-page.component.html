@@ -4,23 +4,31 @@
         <div [formGroup]="linksFormGroup" class="col-md-8">
             <div formArrayName="links">
                 <h1>Links</h1>
+                <div class="alert alert-info">
+                    Enter a descriptive title for your link in the "Link Title" field. This title will be displayed to other users.
+                    <hr>
+                    Next, enter the URL of your social media profile in the "Profile Link" field. Make sure to provide the direct link
+                    to your profile page.
+                </div>
+                <div class="row gx-2 mb-3">
+                    <div class="col-5">Link title</div>
+                    <div class="col-7">Profile link</div>
+                </div>
                 <div *ngFor="let group of links.controls; let i = index">
                     <div [formGroupName]="i" class="row gx-2 mb-3">
-                        <div class="col-2">
+                        <!-- <div class="col-2">
                             <div class="form-group">
                                 <label for="icon-{{ i }}">Icon</label>
                                 <input type="text" id="icon-{{ i }}" placeholder="Link icon" class="form-control" formControlName="linkIcon">
                             </div>
-                        </div>
-                        <div class="col-4">
+                        </div> -->
+                        <div class="col-5">
                             <div class="form-group">
-                                <label for="linkTitle-{{ i }}">Link title</label>
                                 <input type="text" id="linkTitle-{{ i }}" placeholder="Link icon" class="form-control" formControlName="linkTitle">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
                             <div class="form-group">
-                                <label for="link-{{ i }}">Profile link</label>
                                 <div class="row gx-2">
                                     <div class="col-9">
                                         <input type="text" id="link-{{ i }}" placeholder="Actual link" class="form-control" formControlName="link">
@@ -36,19 +44,19 @@
             </div>
             <div [formGroup]="addLinksFormGroup" class="row gx-2 mb-3">
                 <h2>Add new profile link</h2>
-                <div class="col-2">
+                <!-- <div class="col-2">
                     <div class="form-group">
                         <label for="icon">Icon</label>
                         <input type="text" id="icon" placeholder="Link icon" class="form-control" formControlName="linkIcon">
                     </div>
-                </div>
-                <div class="col-4">
+                </div> -->
+                <div class="col-5">
                     <div class="form-group">
                         <label for="linkTitle">Link title</label>
-                        <input type="text" id="linkTitle" placeholder="Link icon" class="form-control" formControlName="linkTitle">
+                        <input type="text" id="linkTitle" placeholder="Enter a descriptive title" class="form-control" formControlName="linkTitle">
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-7">
                     <div class="form-group">
                         <label for="link">Profile link</label>
                         <div class="row gx-1">
