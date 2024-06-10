@@ -1,0 +1,10 @@
+<div class="container py-3">
+    <h1>Help - mipov.net</h1>
+    <ng-container *ngIf="help$ | async as help">
+        <div *ngFor="let data of help">
+            <h2>{{ data.title }}</h2>
+            <div [innerHTML]="data.data"></div>
+            <hr>
+        </div>
+    </ng-container>
+</div>

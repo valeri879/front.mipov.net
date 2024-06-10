@@ -1,8 +1,8 @@
-<div class="dropdown">
-    <button (click)="toggle = !toggle" class="btn btn-sm btn-primary dropdown-toggle" type="button">
+<div class="dropdown d-flex flex-column">
+    <button (click)="toggle = !toggle" class="btn text-start text-lg-center align-self-stretch btn-sm btn-primary dropdown-toggle" type="button">
         ⚙️ User
     </button>
-    <ul style="right: 0;" [class.show]="toggle" class="dropdown-menu dropdown-menu-end" (click)="toggle = !toggle">
+    <ul style="right: 0; top: 100%;" [class.show]="toggle" class="dropdown-menu dropdown-menu-end" (click)="toggle = !toggle">
         <li><a routerLinkActive="fw-bold" class="dropdown-item" routerLink="/profile">👤 Profile</a></li>
         <li><a routerLinkActive="fw-bold" class="dropdown-item" routerLink="/links">🔗 Links</a></li>
         <li><hr class="dropdown-divider"></li>

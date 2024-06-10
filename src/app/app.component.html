@@ -1,21 +1,35 @@
 <header>
-    <nav class="navbar bg-primary-subtle">
+    <nav class="navbar navbar-expand-lg bg-light">
+
         <div class="container">
-            <div>
-                <a routerLink="/" class="navbar-brand mb-0 h1"><b>mipov.net</b></a>
-                <!-- <a routerLink="/about" class="px-2">About</a>
-                <a routerLink="/help" class="px-2">Help</a> -->
-                <a routerLink="/privacy-policy" class="px-2">Privacy policy</a>
+            <a routerLink="/" class="navbar-brand d-flex  align-items-center mb-0 h1">
+                <img class="me-2" src="/assets/logo.svg" width="30px" alt="mipovnet logo">
+                <b>mipov.net</b>
+            </a>
+            <button class="navbar-toggler" type="button" (click)="show = !show">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" [class.show]="show">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a routerLinkActive="active" routerLink="/help" class="nav-link">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLinkActive="active" routerLink="/privacy-policy" class="nav-link">Privacy policy</a>
+                    </li>
+                </ul>
+
+                <ul *ngIf="authenticationService.isLoggedIn$ | async; else signUpButton" class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <app-user-menu-dropdown></app-user-menu-dropdown>
+                    </li>
+                </ul>
+                <ng-template #signUpButton>
+                    <a routerLink="/login" class="btn d-block w-md-auto btn-sm btn-primary mb-2 mb-lg-0">Log in</a>
+                    <a routerLink="/" class="btn btn-sm d-block btn-outline-success ms-0 ms-lg-2">Sign up</a>
+                </ng-template>
             </div>
-            <ng-container *ngIf="authenticationService.isLoggedIn$ | async; else signUpButton">
-                <app-user-menu-dropdown></app-user-menu-dropdown>
-            </ng-container>
-            <ng-template #signUpButton>
-                <div class="d-flex">
-                    <a routerLink="/login" class="btn btn-sm btn-primary">Log in</a>
-                    <a routerLink="/" class="btn btn-sm btn-outline-success ms-1">Sign up</a>
-                </div>
-            </ng-template>
         </div>
     </nav>
 </header>
