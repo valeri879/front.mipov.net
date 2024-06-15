@@ -31,6 +31,12 @@ export const routes: Routes = [
         title: 'Help - mipov.net'
     },
     {
+        path: 'email-verification',
+        loadComponent: () => import('./pages/email-verification-page/email-verification-page.component').then(m => m.EmailVerificationPageComponent),
+        title: 'Email verification - mipov.net',
+        canActivate: [authGuard]
+    },
+    {
         path: 'profile',
         loadComponent: () => import('./pages/profile-page/profile-page.component').then(m => m.ProfilePageComponent),
         title: 'Privacy policy',

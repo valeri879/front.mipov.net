@@ -3,7 +3,7 @@ import { ProfileService } from '../../services/profile.service';
 import { catchError, Observable, tap } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -16,7 +16,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
     NgIf,
     AsyncPipe,
     JsonPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'

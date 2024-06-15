@@ -1,0 +1,26 @@
+<div class="container py-3">
+    <div style="max-width: 420px;" class="card mx-auto">
+        <div class="card-body">
+            <h1 class="card-title">Email verification</h1>
+            <p>An email verification code has been sent to your email. Please check your inbox and paste the code in the form control below. If you haven't received the code, please check your spam folder.</p>
+            <div class="form-group mb-2"> 
+                <label for="Verification-code"><b>Verification Code</b></label>
+                <input [readOnly]="isSubmitSuccess" [formControl]="verificationCode" [class.is-invalid]="error" type="text" id="Verification-code" class="form-control" placeholder="for exapmle: 3411254">
+            </div>
+            
+            <!-- alert messages -->
+            <div *ngIf="success" class="alert alert-success">{{ success }}</div>
+            <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+            <button style="text-decoration: none;" [disabled]="loading || resendCounter > 0 || isSubmitSuccess" (click)="getVerificationCode()" class="btn btn-link w-100 mb-2">
+                <div *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></div>
+                Resend
+                <ng-container *ngIf="!loading && resendCounter > 0">00:{{ resendCounter < 10 ? '0' + resendCounter : resendCounter }}</ng-container>
+            </button>
+
+            <button (click)="submit()" [disabled]="loading || verificationCode.invalid || isSubmitSuccess" class="btn btn-primary w-100">
+                Submit
+            </button>
+        </div>
+    </div>
+</div>

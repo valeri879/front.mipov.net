@@ -47,7 +47,7 @@ export class SignUpPageComponent implements OnInit{
     this._authenticationService.signUp(this.form.value).subscribe({
       next: ({ accessToken }) => {
         if (accessToken) {
-            this._router.navigateByUrl('/profile');
+            this._router.navigateByUrl('/email-verification');
         };
       },
       error: ({ error }) => this.error = error

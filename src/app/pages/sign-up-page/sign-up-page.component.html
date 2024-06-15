@@ -10,7 +10,7 @@
             <form [formGroup]="form">
                 <label for="userName">User name:</label>
                 <div [class.has-validation]="(userName.invalid && userName.dirty) || error?.errorType == 'userName'" class="input-group has-validation mb-3">
-                    <span class="input-group-text">https://mipov.net/</span>
+                    <span class="input-group-text"><span class="text-success">https:</span>//mipov.net/</span>
                     <input [class.is-invalid]="(userName.invalid && userName.dirty) || error?.errorType == 'userName'" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
                     <!-- frontend validation -->
                     <ng-container *ngIf="userName.errors">

@@ -1,12 +1,13 @@
 <ng-container *ngIf="user$ | async as user">
   <div class="container py-3">
+    <div class="alert alert-warning" *ngIf="!user.isVerified">Please check your email for the verification code. <a routerLink="/email-verification">verify email</a></div>
     <h2>Personal info</h2>
     <div class="card mb-3">
       <div class="card-body">
           <form [formGroup]="personalInfoFormGroup">
           <label for="userName">User name:</label>
           <div [class.has-validation]="updateUserNameFirstNameLastNameAboutError" class="input-group mb-3">
-            <span class="input-group-text">https://mipov.net/</span>
+            <span class="input-group-text"><span class="text-success">https:</span>//mipov.net/</span>
             <input [class.is-valid]="updateUserNameFirstNameLastNameAboutSuccess" [class.is-invalid]="updateUserNameFirstNameLastNameAboutError" class="form-control" id="userName" type="text" formControlName="userName" placeholder="Unique user name">
             <!-- frontend validation -->
             <div *ngIf="updateUserNameFirstNameLastNameAboutError" class="invalid-feedback">{{ updateUserNameFirstNameLastNameAboutError }}</div>
