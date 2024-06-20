@@ -1,6 +1,7 @@
 {
   "routes": [
     "/",
+    "/email-verification",
     "/error",
     "/help",
     "/links",
