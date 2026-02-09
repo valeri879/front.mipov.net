@@ -14,7 +14,7 @@
 
             <button style="text-decoration: none;" [disabled]="loading || resendCounter > 0 || isSubmitSuccess" (click)="getVerificationCode()" class="btn btn-link w-100 mb-2">
                 <div *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></div>
-                Resend
+                Send me verification code
                 <ng-container *ngIf="!loading && resendCounter > 0">00:{{ resendCounter < 10 ? '0' + resendCounter : resendCounter }}</ng-container>
             </button>
 

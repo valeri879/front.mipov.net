@@ -2,9 +2,9 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('refresh token')
   const authenticationService = inject(AuthenticationService);
   return next(req).pipe(
     catchError(error => {
@@ -21,6 +21,10 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
             throw refreshTokenError;
           })
         );
+      }
+      if (error.status === 400) {
+        authenticationService.logOut();
+        console.log('eee')
       }
       throw error;
     })
