@@ -4,7 +4,7 @@ import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -32,6 +32,8 @@ export class LinksPageComponent implements OnInit {
   public avatarUploadSuccess: string | null = null;
   public avatarUploadError: string | null = null;
   public avatarPath: string | null = null;
+  public isAvatarUploading: boolean = false;
+  public avatarUploadProgress: number = 0;
 
   user$!: Observable<User>;
   
@@ -104,20 +106,35 @@ export class LinksPageComponent implements OnInit {
 
     this.avatarUploadError = null;
     this.avatarUploadSuccess = null;
+    this.isAvatarUploading = true;
+    this.avatarUploadProgress = 0;
 
     this._profileService.uploadAvatar(file).subscribe({
-      next: ({ message, avatarPath }) => {
-        this.avatarUploadSuccess = message || 'Avatar updated.';
-        if (avatarPath) {
-          this.avatarPath = avatarPath;
-        } else {
-          this.loadProfile();
+      next: (event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const total = event.total || 0;
+          this.avatarUploadProgress = total > 0 ? Math.round((event.loaded / total) * 100) : 0;
+          return;
         }
-        setTimeout(() => {
-          this.avatarUploadSuccess = null;
-        }, 2000);
+
+        if (event instanceof HttpResponse) {
+          const { message, avatarPath } = event.body || {};
+          this.avatarUploadSuccess = message || 'Avatar updated.';
+          if (avatarPath) {
+            this.avatarPath = avatarPath;
+          } else {
+            this.loadProfile();
+          }
+          this.avatarUploadProgress = 100;
+          this.isAvatarUploading = false;
+          setTimeout(() => {
+            this.avatarUploadSuccess = null;
+          }, 2000);
+        }
       },
       error: (errorResponse: HttpErrorResponse) => {
+        this.isAvatarUploading = false;
+        this.avatarUploadProgress = 0;
         this.avatarUploadError = errorResponse.error?.message || 'Failed to upload avatar.';
       }
     });

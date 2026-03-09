@@ -79,11 +79,19 @@
                     class="avatar-button border bg-dark text-white rounded-circle d-flex align-items-center font-weight-bold justify-content-center"
                     (click)="avatarInput.click()"
                     title="Upload avatar"
+                    [disabled]="isAvatarUploading"
                 >
                     <img *ngIf="avatarPath || user.avatarPath" [src]="avatarPath || user.avatarPath" alt="User avatar" class="avatar-image" (error)="avatarPath = null">
                     <span *ngIf="!avatarPath && !user.avatarPath">{{ user.userName.slice(0,1) }}</span>
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="avatarInput.click()">Upload avatar</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="avatarInput.click()" [disabled]="isAvatarUploading">
+                    {{ isAvatarUploading ? 'Uploading...' : 'Upload avatar' }}
+                </button>
+                <div class="progress w-100" *ngIf="isAvatarUploading" role="progressbar" aria-label="Avatar upload progress" [attr.aria-valuenow]="avatarUploadProgress" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" [style.width.%]="avatarUploadProgress">
+                        {{ avatarUploadProgress }}%
+                    </div>
+                </div>
                 {{ '@' + user.userName }}
                 <div class="text-secondary">{{ user.about }}</div>
                 <a  target="_blank" style="text-decoration: none;" [class.bg-success-subtle]="linksUpdatedSuccess" [class.border-success]="linksUpdatedSuccess" class="card w-100" [href]="link['link']" *ngFor="let link of linksFormGroup.value.links">

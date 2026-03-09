@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
@@ -26,9 +26,12 @@ export class ProfileService {
     return this._http.put<{ message: string }>(`${environment.apiUrl}/profile/update-links`, data);
   }
 
-  uploadAvatar(file: File): Observable<{ message: string; avatarPath?: string }> {
+  uploadAvatar(file: File): Observable<HttpEvent<{ message: string; avatarPath?: string }>> {
     const formData = new FormData();
     formData.append('avatar', file);
-    return this._http.put<{ message: string; avatarPath?: string }>(`${environment.apiUrl}/profile/upload-avatar`, formData);
+    return this._http.put<{ message: string; avatarPath?: string }>(`${environment.apiUrl}/profile/upload-avatar`, formData, {
+      observe: 'events',
+      reportProgress: true
+    });
   }
 }
