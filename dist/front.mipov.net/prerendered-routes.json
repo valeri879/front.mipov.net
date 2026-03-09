@@ -1,0 +1,14 @@
+{
+  "routes": [
+    "/",
+    "/email-verification",
+    "/error",
+    "/help",
+    "/links",
+    "/login",
+    "/password-reset",
+    "/privacy-policy",
+    "/profile",
+    "/set-new-password"
+  ]
+}
