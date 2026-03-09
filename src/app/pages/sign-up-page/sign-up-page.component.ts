@@ -16,12 +16,11 @@ import { MetaService } from '../../services/meta.service';
   ],
 })
 export class SignUpPageComponent implements OnInit{
+  public form!: FormGroup;
+  public error: { message: string, errorType: string } | null = null;
+  public showPassword: boolean = false;
 
   meta = inject(MetaService);
-
-  public form!: FormGroup;
-  public error!: { message: string, errorType: string };
-  public showPassword: boolean = false;
 
   constructor(
     private _authenticationService: AuthenticationService,

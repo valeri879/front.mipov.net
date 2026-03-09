@@ -49,7 +49,7 @@ export class ProfilePageComponent implements OnInit {
     newEmail: new FormControl('', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(255)]),
   });
 
-  error!: any;
+  error: { message: string, errorType: string } | null = null;
 
   // success prop for personal info
   updateUserNameFirstNameLastNameAboutSuccess: boolean = false;
