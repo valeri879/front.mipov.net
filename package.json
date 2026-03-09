@@ -22,7 +22,7 @@
     "@angular/platform-server": "^18.0.4",
     "@angular/router": "^18.0.4",
     "@angular/ssr": "^18.0.5",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.8",
     "express": "^4.19.2",
     "ngx-cookie-service": "^18.0.0",
     "ngx-cookie-service-ssr": "^18.0.0",
