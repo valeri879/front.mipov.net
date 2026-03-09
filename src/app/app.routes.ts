@@ -16,6 +16,12 @@ export const routes: Routes = [
         canActivate: [loginGuard]
     },
     {
+        path: 'password-reset',
+        loadComponent: () => import('./pages/password-reset-page/password-reset-page.component').then(m => m.PasswordResetPageComponent),
+        title: 'Password reset - mipov.net',
+        canActivate: [loginGuard]
+    },
+    {
         path: 'error',
         loadComponent: () => import('./pages/error-page/error-page.component').then(m => m.ErrorPageComponent),
         title: 'Error'

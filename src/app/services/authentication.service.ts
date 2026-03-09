@@ -32,6 +32,14 @@ export class AuthenticationService {
     );
   }
 
+  requestPasswordReset(data: { email: string }): Observable<{ message: string }> {
+    return this._http.post<{ message: string }>(`${environment.apiUrl}/reset`, data);
+  }
+
+  resetPassword(data: { token: string; password: string }): Observable<{ message: string }> {
+    return this._http.post<{ message: string }>(`${environment.apiUrl}/mail/reset-password`, data);
+  }
+
   refreshToken(): Observable<{ accessToken: string; refreshToken: string }> {
     return this._http.get<{ accessToken: string; refreshToken: string }>(`${environment.apiUrl}/token`);
   }

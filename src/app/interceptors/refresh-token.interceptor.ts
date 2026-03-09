@@ -22,10 +22,6 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
           })
         );
       }
-      if (error.status === 400) {
-        authenticationService.logOut();
-        console.log('eee')
-      }
       throw error;
     })
   );
