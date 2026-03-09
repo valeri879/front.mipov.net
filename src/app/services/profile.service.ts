@@ -25,4 +25,10 @@ export class ProfileService {
   updateLinks(data: any): Observable<{ message: string }> {
     return this._http.put<{ message: string }>(`${environment.apiUrl}/profile/update-links`, data);
   }
+
+  uploadAvatar(file: File): Observable<{ message: string; avatarPath?: string }> {
+    const formData = new FormData();
+    formData.append('avatar', file);
+    return this._http.put<{ message: string; avatarPath?: string }>(`${environment.apiUrl}/profile/upload-avatar`, formData);
+  }
 }

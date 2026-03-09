@@ -29,17 +29,28 @@ export class LinksPageComponent implements OnInit {
   public addLinksFormGroup: FormGroup = this._linksGroup();
 
   public linksUpdatedSuccess: any;
+  public avatarUploadSuccess: string | null = null;
+  public avatarUploadError: string | null = null;
+  public avatarPath: string | null = null;
 
   user$!: Observable<User>;
   
   ngOnInit(): void {
+    this.loadProfile();
+  }
+
+  private loadProfile(): void {
     this.user$ = this._profileService.profile().pipe(
       tap(({ links }) => {
+        this.links.clear();
         links.forEach(linksData => {
           this.links.push(this._linksGroup(linksData.link, linksData.linkTitle/* , linksData.linkIcon */))
         });
+      }),
+      tap((user) => {
+        this.avatarPath = user.avatarPath;
       })
-    ); 
+    );
   }
 
   private _linksGroup(link: string = '', linktitle: string = ''/* , linkIcon: string = '' */): FormGroup {
@@ -76,5 +87,41 @@ export class LinksPageComponent implements OnInit {
         console.error(errorResponse.error.message);
       }
     });
+  }
+
+  onAvatarFileChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      this.avatarUploadError = 'Please select an image file.';
+      target.value = '';
+      return;
+    }
+
+    this.avatarUploadError = null;
+    this.avatarUploadSuccess = null;
+
+    this._profileService.uploadAvatar(file).subscribe({
+      next: ({ message, avatarPath }) => {
+        this.avatarUploadSuccess = message || 'Avatar updated.';
+        if (avatarPath) {
+          this.avatarPath = avatarPath;
+        } else {
+          this.loadProfile();
+        }
+        setTimeout(() => {
+          this.avatarUploadSuccess = null;
+        }, 2000);
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.avatarUploadError = errorResponse.error?.message || 'Failed to upload avatar.';
+      }
+    });
+
+    target.value = '';
   }
 }
