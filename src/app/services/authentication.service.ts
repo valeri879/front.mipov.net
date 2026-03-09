@@ -13,9 +13,9 @@ export class AuthenticationService {
   private _http = inject(HttpClient);
   private _cookieService = inject(CookieService);
   private _router = inject(Router);
-  
+
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  
+
   constructor() {
     this._isLoggedIn();
   }
@@ -37,7 +37,7 @@ export class AuthenticationService {
   }
 
   resetPassword(data: { token: string; password: string }): Observable<{ message: string }> {
-    return this._http.post<{ message: string }>(`${environment.apiUrl}/mail/reset-password`, data);
+    return this._http.post<{ message: string }>(`${environment.apiUrl}/password-reset`, data);
   }
 
   refreshToken(): Observable<{ accessToken: string; refreshToken: string }> {

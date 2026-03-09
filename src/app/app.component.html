@@ -39,11 +39,42 @@
 </div>
 
 
-<footer class="bg-body-tertiary py-3">
+<footer class="bg-body-tertiary py-3 border-top">
 <!--     <div class="container text-center d-flex justify-content-center">
         <a class="px-1" routerLink="/privacy-policy">Privacy policy</a>
         <a class="px-1" routerLink="/help">Help</a>
         <a class="px-1" routerLink="/about">About</a>
     </div> -->
-    <div class="text-center">Created by <a target="_blank" href="https://github.com/valeri879">Val Do</a> with ❤️</div>
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+        <div class="text-center text-md-start">Created by <a target="_blank" href="https://github.com/valeri879">Val Do</a> with ❤️</div>
+        <div class="theme-toggle btn-group" role="group" aria-label="Theme switch">
+            <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-primary]="themeMode === 'light'"
+                [class.btn-outline-primary]="themeMode !== 'light'"
+                (click)="setThemeMode('light')"
+            >
+                Light
+            </button>
+            <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-primary]="themeMode === 'dark'"
+                [class.btn-outline-primary]="themeMode !== 'dark'"
+                (click)="setThemeMode('dark')"
+            >
+                Dark
+            </button>
+            <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-primary]="themeMode === 'system'"
+                [class.btn-outline-primary]="themeMode !== 'system'"
+                (click)="setThemeMode('system')"
+            >
+                OS
+            </button>
+        </div>
+    </div>
 </footer>
